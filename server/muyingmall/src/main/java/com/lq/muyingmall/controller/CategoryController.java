@@ -34,22 +34,27 @@ public class CategoryController {
 
     /**
      * 添加分类
+     *
      * @param passWord 超级管理员密码
      */
     @RequestMapping(value = "/addCategory", method = {RequestMethod.POST})
     public BaseResponse addCategory(@RequestBody Category category,
-                              @RequestHeader(value = "password", required = false) String passWord) {
+                                    @RequestHeader(value = "password", required = false) String passWord) {
         //TODO:校验密码
         if ("123".equals(passWord)) {
-            categoryRepository.save(category);
-            return new BaseResponse(0,"添加成功",null);
-        }else {
-            return new BaseResponse(-1,"无权限",null);
+            Category tempCategory = categoryRepository.findByCategoryName(category.getCategoryName());
+            if (tempCategory == null) {
+                categoryRepository.save(category);
+                return new BaseResponse(0, "添加成功", null);
+            } else {
+                return new BaseResponse(-1, "该分类已存在", null);
+            }
+        } else {
+            return new BaseResponse(-1, "无权限", null);
         }
     }
 
 
-    //TODO:
 //    @RequestMapping(value = "/addCategory", method = {RequestMethod.POST})
 //    public String addCategory(String context, @RequestHeader(value = "token", required = false) String token) {
 //        logger.info("hhhhh=======" + context);
