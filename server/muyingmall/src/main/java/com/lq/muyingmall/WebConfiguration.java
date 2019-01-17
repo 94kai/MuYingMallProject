@@ -9,15 +9,15 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@Configuration
+//@Configuration
 public class WebConfiguration {
 
-    @Bean
+//    @Bean
     public RemoteIpFilter remoteIpFilter() {
         return new RemoteIpFilter();
     }
 
-    @Bean
+//    @Bean
     public FilterRegistrationBean testFilterRegistration() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new MyFilter());

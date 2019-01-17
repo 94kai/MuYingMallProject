@@ -1,12 +1,16 @@
 package com.lq.muyingmall.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.io.Serializable;
 
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User implements Serializable {
     @Id
     @GeneratedValue
@@ -70,5 +74,16 @@ public class User implements Serializable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", passWord='" + passWord + '\'' +
+                ", type=" + type +
+                '}';
     }
 }
