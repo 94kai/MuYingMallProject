@@ -27,9 +27,7 @@ public class CategoryController {
     @RequestMapping(value = "/queryAllCategory", method = {RequestMethod.GET})
     public BaseResponse<List<Category>> findAllCategory() {
         List<Category> categoryList = categoryRepository.findAll();
-        BaseResponse<List<Category>> response = new BaseResponse<>(0, null, null);
-        response.setData(categoryList);
-        return response;
+        return new BaseResponse<>(0, categoryList);
     }
 
     /**
@@ -45,12 +43,12 @@ public class CategoryController {
             Category tempCategory = categoryRepository.findByCategoryName(category.getCategoryName());
             if (tempCategory == null) {
                 categoryRepository.save(category);
-                return new BaseResponse(0, "添加成功", null);
+                return new BaseResponse(0, "添加成功");
             } else {
-                return new BaseResponse(-1, "该分类已存在", null);
+                return new BaseResponse(-1, "该分类已存在");
             }
         } else {
-            return new BaseResponse(-1, "无权限", null);
+            return new BaseResponse(-1, "无权限");
         }
     }
 

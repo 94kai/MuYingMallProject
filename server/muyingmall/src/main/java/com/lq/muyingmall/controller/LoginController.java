@@ -34,7 +34,7 @@ public class LoginController {
             tokenMap.put(user.getUserName(), token);
             return new BaseResponse(0, "登陆成功", "124");
         }
-        return new BaseResponse(-1, "登录失败", null);
+        return new BaseResponse(-1, "登录失败");
     }
 
     @RequestMapping(value = "/hhhhh", method = {RequestMethod.GET})
@@ -47,7 +47,7 @@ public class LoginController {
     public BaseResponse register(@RequestBody User user) {
         User tempUser = userRepository.findByUserName(user.getUserName());
         if (tempUser != null) {
-            return new BaseResponse(-1, "用户名被占用", null);
+            return new BaseResponse(-1, "用户名被占用");
         }
         User save = userRepository.save(user);
         String token = getTokenByUserName(save.getUserName());

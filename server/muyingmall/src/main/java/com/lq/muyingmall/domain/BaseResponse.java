@@ -9,10 +9,27 @@ public class BaseResponse<Data> {
     private String token;
     private Data data;
 
-    public BaseResponse(int code, String msg,String token) {
+    public BaseResponse() {
+    }
+
+    public BaseResponse(int code) {
+        this.code = code;
+    }
+
+    public BaseResponse(int code, String msg, String token) {
         this.code = code;
         this.msg = msg;
         this.token = token;
+    }
+
+    public BaseResponse(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
+    public BaseResponse(int code, Data data) {
+        this.code = code;
+        this.data = data;
     }
 
     public int getCode() {
