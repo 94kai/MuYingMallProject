@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mu_ying_mall/utils/network.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:flutter_page_indicator/flutter_page_indicator.dart';
-
+import 'promotion_view.dart';
+import '../common/recommend_product.dart';
 class HotView extends StatefulWidget {
   @override
   HotViewState createState() {
@@ -10,38 +10,54 @@ class HotView extends StatefulWidget {
   }
 }
 
-class HotViewState extends State<HotView> {
+class HotViewState extends State<HotView>
+    with AutomaticKeepAliveClientMixin<HotView> {
   ///热门banner的图片集合
   List<dynamic> imageUrls = [];
+  List<dynamic> promotionList = [];
+  List<dynamic> newsList = [
+    {"news": "暂无资讯"}
+  ];
+  List<dynamic> recommendList = [
+
+  ];
 
   @override
-  void initState() {
+  initState() {
     super.initState();
     get("queryHotBanner", (data) {
       setState(() {
         imageUrls = data;
       });
     });
+    get("queryHotPromotion", (data) {
+      setState(() {
+        promotionList = data['promotionList'];
+        newsList = data['newsList'];
+      });
+    });
+    get("queryRecommendProduct", (data) {
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _renderHotBanner(),
-        ],
+      color: Colors.deepOrange,
+      child: ListView.builder(
+        itemBuilder: (context, index) => _buildItem(context, index),
       ),
     );
   }
 
+  ///渲染轮播图
   _renderHotBanner() {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.width / 2.5,
       child: Swiper(
+          scale: 0.9,
+          viewportFraction: 0.8,
           itemBuilder: (BuildContext context, int index) {
             return new Image.network(
               imageUrls[index]['bannerImg'],
@@ -58,4 +74,21 @@ class HotViewState extends State<HotView> {
                   activeSize: 7))),
     );
   }
+
+
+  _buildItem(context, index) {
+    if (index == 0) {
+      return _renderHotBanner();
+    } else if (index == 1) {
+      return PromotionView(promotionList,newsList);
+    } else {
+      return buildRecommendProductList(recommendList);
+    }
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+
+
+
 }

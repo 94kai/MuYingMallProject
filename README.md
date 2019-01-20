@@ -46,5 +46,50 @@
 
 - userId+时间戳 进行md5产生token
 
+### 数据上传
+
+1. 首页-热门-活动数据
+
+   ```json
+   post请求，向localhost:8080/api/addHotPromotion提交json
+   注意：1.title必须有。2.product节点下需要大于2，最好不要超过2，因为只会解析两条。3.图片最好为正方形。
+   {
+   	"title": "限时抢购",
+   	"product": [{
+   			"productImg": "https://gw.alicdn.com/bao/uploaded/i3/25929435/O1CN01wpWFNn2JZHNIOuUfJ_!!25929435.jpg",
+   			"title": "法国拉杜蓝乔核桃油婴幼儿食用婴儿儿童无添加宝宝辅食抖音同款"
+   		},
+   		{
+   			"productImg": "https://gw.alicdn.com/bao/uploaded/i2/26664899/O1CN01VPIcRw1m3moMyiaXm_!!0-item_pic.jpg",
+   			"title": "美国嘉宝星星泡芙米饼宝宝进口吃的小零食婴儿8个月幼儿食品1-3岁"
+   		}
+   	]
+   }
+   ```
+
+2. 首页-热门-资讯
+
+   ```json
+   post请求，向localhost:8080/api/addHotNews提交json
+   [
+       {
+   		"news": "怎样提高母乳喂养的质和量?"
+   	},
+   	{
+   		"news": "宝宝补维D能防糖尿病"
+   	}, {
+   		"news": "父母要善于发展宝宝的听觉"
+   	}, {
+   		"news": "请多给孩子一次“自我辩解”的机会"
+   	},
+   ]
+   ```
+
+   ​
+
+​	
+
+
+
 # Client
 
