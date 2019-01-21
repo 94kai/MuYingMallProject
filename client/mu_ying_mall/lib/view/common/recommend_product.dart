@@ -1,31 +1,35 @@
 import 'package:flutter/material.dart';
 import '../../utils/network.dart';
-class RecommendProductList extends StatefulWidget{
-  @override
-  RecommendProductListState createState() {
-    return new RecommendProductListState();
-  }
-}
 
-class RecommendProductListState extends State<RecommendProductList> {
-  @override
-  initState() {
-    super.initState();
-
-  }
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Text("recommend");
-  }
-}
-
-
-buildRecommendProductList(recommendList){
-  if (recommendList.length==0) {
+buildRecommendProductList(List recommendProductList, int index) {
+  if (recommendProductList.length <= index) {
     return null;
-  }else{
-    recommendList.map().toList();
   }
+  if (!index.isOdd) {
+    var dataLeft, dataRight;
+    if (index < recommendProductList.length) {
+      dataLeft = recommendProductList[index];
+    }
+    if ((index + 1) < recommendProductList.length) {
+      dataRight = recommendProductList[index + 1];
+    }
 
+    return _buildRecommendTwoItem(dataLeft, dataRight);
+  } else {
+    return Container();
+  }
+}
+
+_buildRecommendTwoItem(dataLeft, dataRight) {
+  return Container(
+    padding: EdgeInsets.all(10),
+    child: Row(
+      children: <Widget>[
+        Card(
+          child: Text(dataLeft),
+        ),
+        (dataRight != null) ? Card(child: Text(dataRight)) : Container(),
+      ],
+    ),
+  );
 }

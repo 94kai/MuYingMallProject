@@ -3,6 +3,7 @@ import 'package:mu_ying_mall/utils/network.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'promotion_view.dart';
 import '../common/recommend_product.dart';
+
 class HotView extends StatefulWidget {
   @override
   HotViewState createState() {
@@ -18,9 +19,7 @@ class HotViewState extends State<HotView>
   List<dynamic> newsList = [
     {"news": "暂无资讯"}
   ];
-  List<dynamic> recommendList = [
-
-  ];
+  List<dynamic> recommendList = ['a'];
 
   @override
   initState() {
@@ -36,8 +35,7 @@ class HotViewState extends State<HotView>
         newsList = data['newsList'];
       });
     });
-    get("queryRecommendProduct", (data) {
-    });
+    get("queryRecommendProduct", (data) {});
   }
 
   @override
@@ -75,20 +73,16 @@ class HotViewState extends State<HotView>
     );
   }
 
-
   _buildItem(context, index) {
     if (index == 0) {
       return _renderHotBanner();
     } else if (index == 1) {
-      return PromotionView(promotionList,newsList);
+      return PromotionView(promotionList, newsList);
     } else {
-      return buildRecommendProductList(recommendList);
+      return buildRecommendProductList(recommendList, index - 2);
     }
   }
 
   @override
   bool get wantKeepAlive => true;
-
-
-
 }
