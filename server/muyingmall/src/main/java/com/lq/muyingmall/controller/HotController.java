@@ -26,6 +26,8 @@ public class HotController {
     private PromotionRepository promotionRepository;
     @Autowired
     private NewsRepository newsRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
     @RequestMapping(value = "/queryHotBanner", method = {RequestMethod.GET})
     public BaseResponse<List<Banner>> findHotBanner() {
@@ -64,7 +66,11 @@ public class HotController {
             return new BaseResponse<>(-1, "暂无活动");
         } else {
             promotionsListData = new ArrayList<>();
-            promotionsList.get().forEach(promotionsListData::add);
+            promotionsList.get().forEach(e -> {
+                List<Product> products = productRepository.queryAllByPromotionId(e.getPomotionId());
+                e.setProductsList(products);
+                promotionsListData.add(e);
+            });
         }
 
         if (newsList.isEmpty()) {
@@ -84,18 +90,16 @@ public class HotController {
 
 
     @RequestMapping(value = "/addHotPromotion", method = {RequestMethod.POST})
-    public BaseResponse addHotPromotion(@RequestBody Promotion promotion) {
-        if ((promotion.getTitle() != null && promotion.getTitle().length() > 0)) {
-            if (promotion.getProduct() != null && promotion.getProduct().size() > 1) {
+    public BaseResponse addHotPromotion(@RequestBody List<Promotion> promotions) {
+        try {
+            for (Promotion promotion : promotions) {
+                promotionRepository.deleteAllByPomotionId(promotion.getPomotionId());
                 promotionRepository.save(promotion);
-                return new BaseResponse(0);
-            } else {
-                return new BaseResponse(-1, "活动数应该为2");
             }
-        } else {
-            return new BaseResponse(-1, "title不能为空");
+            return new BaseResponse(0);
+        } catch (Exception e) {
+            return new BaseResponse(-1, "添加失败");
         }
-
     }
 
     @RequestMapping(value = "/addHotNews", method = {RequestMethod.POST})
@@ -107,7 +111,5 @@ public class HotController {
             return new BaseResponse(0);
         }
         return new BaseResponse(-1, "news不能为空");
-
-
     }
 }

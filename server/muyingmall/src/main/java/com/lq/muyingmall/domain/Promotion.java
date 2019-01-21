@@ -13,10 +13,19 @@ public class Promotion {
     @GeneratedValue
     private long id;
     @Column(nullable = false)
-    String title;
+    private String title;
+    @Column(nullable = false, unique = true)
+    private int pomotionId;
+    @Transient
+    private List<Product> productsList;
 
-    @ElementCollection
-    List<Product> product = new ArrayList<>();
+    public List<Product> getProductsList() {
+        return productsList;
+    }
+
+    public void setProductsList(List<Product> productsList) {
+        this.productsList = productsList;
+    }
 
     public long getId() {
         return id;
@@ -34,11 +43,11 @@ public class Promotion {
         this.title = title;
     }
 
-    public List<Product> getProduct() {
-        return product;
+    public int getPomotionId() {
+        return pomotionId;
     }
 
-    public void setProduct(List<Product> product) {
-        this.product = product;
+    public void setPomotionId(int pomotionId) {
+        this.pomotionId = pomotionId;
     }
 }

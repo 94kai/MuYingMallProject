@@ -17,8 +17,9 @@ public class Category implements Serializable {
     private long id;
     @Column(nullable = false, unique = true)
     private String categoryName;
-    @Column(unique = true)
-    private Category subCategory;
+
+    @Column(nullable = false, unique = true)
+    private int categoryId;
 
     public Category() {
     }
@@ -39,11 +40,11 @@ public class Category implements Serializable {
         this.categoryName = categoryName;
     }
 
-    public Category getSubCategory() {
-        return subCategory;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setSubCategory(Category subCategory) {
-        this.subCategory = subCategory;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }

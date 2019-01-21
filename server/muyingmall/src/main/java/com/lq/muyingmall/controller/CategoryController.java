@@ -36,17 +36,15 @@ public class CategoryController {
      * @param passWord 超级管理员密码
      */
     @RequestMapping(value = "/addCategory", method = {RequestMethod.POST})
-    public BaseResponse addCategory(@RequestBody Category category,
+    public BaseResponse addCategory(@RequestBody List<Category> categorys,
                                     @RequestHeader(value = "password", required = false) String passWord) {
         //TODO:校验密码
         if ("123".equals(passWord)) {
-            Category tempCategory = categoryRepository.findByCategoryName(category.getCategoryName());
-            if (tempCategory == null) {
+            for (Category category : categorys) {
+                categoryRepository.deleteAllByCategoryId(category.getCategoryId());
                 categoryRepository.save(category);
-                return new BaseResponse(0, "添加成功");
-            } else {
-                return new BaseResponse(-1, "该分类已存在");
             }
+            return new BaseResponse(0, "添加成功");
         } else {
             return new BaseResponse(-1, "无权限");
         }
