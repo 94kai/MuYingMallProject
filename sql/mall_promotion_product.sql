@@ -1,0 +1,8 @@
+INSERT INTO mall.promotion_product (promotion_id, product_img, title) VALUES (29, 'https://gw.alicdn.com/bao/uploaded/i3/25929435/O1CN01wpWFNn2JZHNIOuUfJ_!!25929435.jpg', '法国拉杜蓝乔核桃油婴幼儿食用婴儿儿童无添加宝宝辅食抖音同款');
+INSERT INTO mall.promotion_product (promotion_id, product_img, title) VALUES (29, 'https://gw.alicdn.com/bao/uploaded/i2/26664899/O1CN01VPIcRw1m3moMyiaXm_!!0-item_pic.jpg', '美国嘉宝星星泡芙米饼宝宝进口吃的小零食婴儿8个月幼儿食品1-3岁');
+INSERT INTO mall.promotion_product (promotion_id, product_img, title) VALUES (30, 'https://gw.alicdn.com/tfs/TB1hJ2KX6ihSKJjy0FlXXadEXXa-254-318.png', '现货美国采购正品 Dr. Martens Shenzi小七款儿童马丁靴');
+INSERT INTO mall.promotion_product (promotion_id, product_img, title) VALUES (30, 'https://gw.alicdn.com/bao/uploaded/TB1yMHBkMLD8KJjSszeSuuGRpXa.jpg', '【90%白鸭绒】davebella戴维贝拉冬季真貉毛领羽绒服1-11岁DB5989');
+INSERT INTO mall.promotion_product (promotion_id, product_img, title) VALUES (31, 'https://img.alicdn.com/bao/uploaded/i4/TB1io9xKpXXXXcKXFXXXXXXXXXX_!!0-item_pic.jpg_360x360xzq90.jpg_.webp', '现货美国采购正品 Dr. Martens Shenzi小七款儿童马丁靴');
+INSERT INTO mall.promotion_product (promotion_id, product_img, title) VALUES (31, 'https://gw.alicdn.com/bao/uploaded/TB1yMHBkMLD8KJjSszeSuuGRpXa.jpg', '【90%白鸭绒】davebella戴维贝拉冬季真貉毛领羽绒服1-11岁DB5989');
+INSERT INTO mall.promotion_product (promotion_id, product_img, title) VALUES (32, 'https://img.alicdn.com/bao/uploaded/TB26FK8rEl7MKJjSZFDXXaOEpXa_!!2378994113.png_360x360xzq90.jpg_.webp', '扫把簸箕套装家用组合软毛扫帚笤帚刮水卫生间魔法扫把打扫地神器');
+INSERT INTO mall.promotion_product (promotion_id, product_img, title) VALUES (32, 'https://img.alicdn.com/imgextra/i2/1124019936/TB2bPaCoLiSBuNkSnhJXXbDcpXa_!!1124019936-0-beehive-scenes.jpg_360x360xzq90.jpg_.webp', '口红');
