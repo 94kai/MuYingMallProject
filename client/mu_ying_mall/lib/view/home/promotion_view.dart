@@ -105,7 +105,7 @@ class PromotionViewState extends State<PromotionView> {
   _renderPromotionItem(promotions) {
     return promotions.map<Widget>((promotion) {
       var title = promotion['title'];
-      List products = promotion['product'];
+      List products = promotion['productsList'];
       if (products == null || products.length < 1) {
         return Container();
       }
@@ -125,7 +125,7 @@ class PromotionViewState extends State<PromotionView> {
                       padding: EdgeInsets.all(5),
                       child: AspectRatio(
                         aspectRatio: 1,
-                        child: Image.network(products[0]['productImg']),
+                        child: Image.network(products[0]['image']),
                       )),
                   flex: 1,
                 ),
@@ -134,7 +134,7 @@ class PromotionViewState extends State<PromotionView> {
                     padding: EdgeInsets.all(5),
                     child: AspectRatio(
                       aspectRatio: 1,
-                      child: Image.network(products[1]['productImg']),
+                      child: Image.network(products[1]['image']),
                     ),
                   ),
                   flex: 1,

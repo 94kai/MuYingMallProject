@@ -22,14 +22,44 @@ buildRecommendProductList(List recommendProductList, int index) {
 
 _buildRecommendTwoItem(dataLeft, dataRight) {
   return Container(
-    padding: EdgeInsets.all(10),
+    padding: EdgeInsets.all(0),
     child: Row(
       children: <Widget>[
-        Card(
-          child: Text(dataLeft),
+        Expanded(
+          child: _rendProductItem(dataLeft),
+          flex: 1,
         ),
-        (dataRight != null) ? Card(child: Text(dataRight)) : Container(),
+        (dataRight != null)
+            ? Expanded(
+                child: _rendProductItem(dataRight),
+                flex: 1,
+              )
+            : Expanded(
+                child: Container(),
+                flex: 1,
+              ),
       ],
+    ),
+  );
+}
+
+_rendProductItem(data) {
+  return AspectRatio(
+    aspectRatio: 0.8,
+    child: Card(
+      child: Column(
+        children: <Widget>[
+          Padding(
+            child: Image.network(data['image']),
+            padding: EdgeInsets.all(5),
+          ),
+          Text(
+            data['title'],
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
     ),
   );
 }

@@ -19,7 +19,7 @@ class HotViewState extends State<HotView>
   List<dynamic> newsList = [
     {"news": "暂无资讯"}
   ];
-  List<dynamic> recommendList = ['a'];
+  List<dynamic> recommendList = [];
 
   @override
   initState() {
@@ -32,10 +32,16 @@ class HotViewState extends State<HotView>
     get("queryHotPromotion", (data) {
       setState(() {
         promotionList = data['promotionList'];
+        //过滤一下数据，过滤掉商品数小于1的活动
+        promotionList = promotionList
+            .where((promotion) => promotion["productsList"].length > 1)
+            .toList();
         newsList = data['newsList'];
       });
     });
-    get("queryRecommendProduct", (data) {});
+    get("queryProductsByCategory", (data) {
+      recommendList = data;
+    }, params: {"categoryId": "-1"});
   }
 
   @override
