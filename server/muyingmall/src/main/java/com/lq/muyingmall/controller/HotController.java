@@ -68,8 +68,10 @@ public class HotController {
             promotionsListData = new ArrayList<>();
             promotionsList.get().forEach(e -> {
                 List<Product> products = productRepository.queryAllByPromotionId(e.getPomotionId());
-                e.setProductsList(products);
-                promotionsListData.add(e);
+                if (products.size()>1) {
+                    e.setProductsList(products);
+                    promotionsListData.add(e);
+                }
             });
         }
 

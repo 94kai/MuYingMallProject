@@ -1,5 +1,9 @@
 package com.lq.muyingmall.domain;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jdk.nashorn.internal.parser.JSONParser;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,7 +18,7 @@ public class Product {
     @Column()
     private int coupon_value;
     @Column(nullable = false)
-    private int image;
+    private String image;
     @Column(nullable = false)
     private String title;
     @Column()
@@ -22,6 +26,7 @@ public class Product {
     @Column()
     private String price_tag;
     @Column(nullable = false)
+    @JsonAlias("category_id")
     private int categoryId;
     @Column()
     private int promotionId;
@@ -61,11 +66,11 @@ public class Product {
         this.coupon_value = coupon_value;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

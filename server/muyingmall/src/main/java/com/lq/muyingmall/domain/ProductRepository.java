@@ -8,4 +8,8 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> queryAllByPromotionId(int promotionId);
+
+    List<Product> queryAllByCategoryId(int categoryId);
+
+
 }
