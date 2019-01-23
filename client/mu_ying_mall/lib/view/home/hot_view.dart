@@ -3,6 +3,7 @@ import 'package:mu_ying_mall/utils/network.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'promotion_view.dart';
 import '../common/product_list_view.dart';
+import '../../utils/jump.dart';
 
 class HotView extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class HotView extends StatefulWidget {
 class HotViewState extends State<HotView>
     with AutomaticKeepAliveClientMixin<HotView> {
   ///热门banner的图片集合
-  List<dynamic> imageUrls = [];
+  List<dynamic> banners = [];
   List<dynamic> promotionList = [];
   List<dynamic> newsList = [
     {"news": "暂无资讯"}
@@ -26,7 +27,7 @@ class HotViewState extends State<HotView>
     super.initState();
     get("queryHotBanner", (data) {
       setState(() {
-        imageUrls = data;
+        banners = data;
       });
     });
     get("queryHotPromotion", (data) {
@@ -66,12 +67,16 @@ class HotViewState extends State<HotView>
           scale: 0.9,
           viewportFraction: 0.8,
           itemBuilder: (BuildContext context, int index) {
-            return new Image.network(
-              imageUrls[index]['url'],
-              fit: BoxFit.fill,
+            banners[index]['type'] = 'banner';
+            return GestureDetector(
+              onTap: () => jumpToProductDetail(context, banners[index]),
+              child: Image.network(
+                banners[index]['url'],
+                fit: BoxFit.fill,
+              ),
             );
           },
-          itemCount: imageUrls.length,
+          itemCount: banners.length,
           autoplay: true,
           pagination: SwiperPagination(
               builder: DotSwiperPaginationBuilder(
@@ -88,7 +93,8 @@ class HotViewState extends State<HotView>
     } else if (index == 1) {
       return PromotionView(promotionList, newsList);
     } else {
-      return buildProductList(productList, index - 2);
+      return buildProductList(
+          productList, index - 2, (data) => jumpToProductDetail(context, data));
     }
   }
 

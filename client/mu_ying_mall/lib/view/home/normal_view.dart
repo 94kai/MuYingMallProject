@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../common/product_list_view.dart';
 import '../../utils/network.dart';
+import '../../utils/jump.dart';
 class NormalView extends StatefulWidget {
 
   final categoryId;
@@ -13,7 +14,7 @@ class NormalView extends StatefulWidget {
   }
 }
 
-class NormalViewState extends State<NormalView> {
+class NormalViewState extends State<NormalView> with AutomaticKeepAliveClientMixin<NormalView>{
   List<dynamic> productList = [""];
 
   @override
@@ -29,7 +30,11 @@ class NormalViewState extends State<NormalView> {
     // TODO: implement build
     return ListView.builder(
       padding: EdgeInsets.only(top: 10),
-      itemBuilder: (context, index) => buildProductList(productList, index),
+      itemBuilder: (context, index) => buildProductList(productList, index,(data)=>jumpToProductDetail(context,data)),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

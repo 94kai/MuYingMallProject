@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../utils/network.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import '../../utils/jump.dart';
 
 class PromotionView extends StatefulWidget {
   var promotionList;
@@ -121,22 +122,26 @@ class PromotionViewState extends State<PromotionView> {
             Row(
               children: <Widget>[
                 Expanded(
-                  child: Padding(
-                      padding: EdgeInsets.all(5),
-                      child: AspectRatio(
-                        aspectRatio: 1,
-                        child: Image.network(products[0]['image']),
-                      )),
+                  child: GestureDetector(
+                      onTap: () => jumpToProductDetail(context, products[0]),
+                      child: Padding(
+                          padding: EdgeInsets.all(5),
+                          child: AspectRatio(
+                            aspectRatio: 1,
+                            child: Image.network(products[0]['image']),
+                          ))),
                   flex: 1,
                 ),
                 Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(5),
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: Image.network(products[1]['image']),
-                    ),
-                  ),
+                  child: GestureDetector(
+                      onTap: () => jumpToProductDetail(context, products[1]),
+                      child: Padding(
+                        padding: EdgeInsets.all(5),
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: Image.network(products[1]['image']),
+                        ),
+                      )),
                   flex: 1,
                 ),
               ],
