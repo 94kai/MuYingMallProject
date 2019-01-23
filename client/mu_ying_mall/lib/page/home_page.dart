@@ -84,7 +84,7 @@ class HomePageState extends State<HomePage>
       if (category['categoryName'].toString() == "热门") {
         return _renderHotView();
       } else {
-        return _renderNormalView();
+        return _renderNormalView("${category['categoryId']}");
       }
     }).toList();
   }
@@ -95,7 +95,7 @@ class HomePageState extends State<HomePage>
   }
 
   ///渲染首页普通tab下的View
-  _renderNormalView() {
-    return NormalView();
+  _renderNormalView(categoryId) {
+    return NormalView(categoryId);
   }
 }

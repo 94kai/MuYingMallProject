@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mu_ying_mall/utils/network.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'promotion_view.dart';
-import '../common/recommend_product.dart';
+import '../common/product_list_view.dart';
 
 class HotView extends StatefulWidget {
   @override
@@ -19,7 +19,7 @@ class HotViewState extends State<HotView>
   List<dynamic> newsList = [
     {"news": "暂无资讯"}
   ];
-  List<dynamic> recommendList = [];
+  List<dynamic> productList = [""];
 
   @override
   initState() {
@@ -40,7 +40,9 @@ class HotViewState extends State<HotView>
       });
     });
     get("queryProductsByCategory", (data) {
-      recommendList = data;
+      setState(() {
+        productList = data;
+      });
     }, params: {"categoryId": "-1"});
   }
 
@@ -49,6 +51,7 @@ class HotViewState extends State<HotView>
     return Container(
       color: Colors.deepOrange,
       child: ListView.builder(
+        padding: EdgeInsets.only(top: 10),
         itemBuilder: (context, index) => _buildItem(context, index),
       ),
     );
@@ -64,7 +67,7 @@ class HotViewState extends State<HotView>
           viewportFraction: 0.8,
           itemBuilder: (BuildContext context, int index) {
             return new Image.network(
-              imageUrls[index]['bannerImg'],
+              imageUrls[index]['url'],
               fit: BoxFit.fill,
             );
           },
@@ -85,7 +88,7 @@ class HotViewState extends State<HotView>
     } else if (index == 1) {
       return PromotionView(promotionList, newsList);
     } else {
-      return buildRecommendProductList(recommendList, index - 2);
+      return buildProductList(productList, index - 2);
     }
   }
 

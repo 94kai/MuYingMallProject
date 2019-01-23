@@ -1,25 +1,35 @@
 package com.lq.muyingmall.controller;
 
-import com.lq.muyingmall.domain.*;
+import com.lq.muyingmall.domain.Banner;
+import com.lq.muyingmall.domain.BannerRepository;
+import com.lq.muyingmall.domain.BaseResponse;
+import com.lq.muyingmall.domain.News;
+import com.lq.muyingmall.domain.NewsRepository;
+import com.lq.muyingmall.domain.Product;
+import com.lq.muyingmall.domain.ProductRepository;
+import com.lq.muyingmall.domain.Promotion;
+import com.lq.muyingmall.domain.PromotionGroup;
+import com.lq.muyingmall.domain.PromotionRepository;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.jsf.FacesContextUtils;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 @RestController
 @RequestMapping(value = "/api")
 public class HotController {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private BannerRepository bannerRepository;
     @Autowired
@@ -43,15 +53,17 @@ public class HotController {
         }
     }
 
-    @RequestMapping(value = "/addHotBanner", method = {RequestMethod.GET})
-    public BaseResponse addHotBanner(String bannerImg) {
-        Banner banner = bannerRepository.findByBannerImg(bannerImg);
-        if (banner != null) {
-            return new BaseResponse<>(-1, "已经添加过");
-        } else {
-            bannerRepository.save(new Banner(bannerImg));
-            return new BaseResponse<>(0, "banner添加成功");
+    @RequestMapping(value = "/addHotBanner", method = {RequestMethod.POST})
+    public BaseResponse addHotBanner(@RequestBody List<Banner> banners) {
+        for (Banner banner : banners) {
+            try {
+                bannerRepository.deleteById(banner.getId());
+            } catch (Exception e) {
+                logger.error("删除错误，无所谓");
+            }
+            bannerRepository.save(banner);
         }
+        return new BaseResponse<>(0, "banner添加成功");
     }
 
 
@@ -68,7 +80,7 @@ public class HotController {
             promotionsListData = new ArrayList<>();
             promotionsList.get().forEach(e -> {
                 List<Product> products = productRepository.queryAllByPromotionId(e.getPomotionId());
-                if (products.size()>1) {
+                if (products.size() > 1) {
                     e.setProductsList(products);
                     promotionsListData.add(e);
                 }

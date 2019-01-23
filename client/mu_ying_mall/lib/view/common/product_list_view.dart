@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import '../../utils/network.dart';
 
-buildRecommendProductList(List recommendProductList, int index) {
-  if (recommendProductList.length <= index) {
+buildProductList(List productList, int index) {
+  if (productList.length <= index) {
     return null;
   }
   if (!index.isOdd) {
     var dataLeft, dataRight;
-    if (index < recommendProductList.length) {
-      dataLeft = recommendProductList[index];
+    if (index < productList.length) {
+      dataLeft = productList[index];
     }
-    if ((index + 1) < recommendProductList.length) {
-      dataRight = recommendProductList[index + 1];
+    if ((index + 1) < productList.length) {
+      dataRight = productList[index + 1];
     }
 
-    return _buildRecommendTwoItem(dataLeft, dataRight);
+    return _buildProductTwoItem(dataLeft, dataRight);
   } else {
     return Container();
   }
 }
 
-_buildRecommendTwoItem(dataLeft, dataRight) {
+_buildProductTwoItem(dataLeft, dataRight) {
   return Container(
     padding: EdgeInsets.all(0),
     child: Row(
@@ -44,6 +44,9 @@ _buildRecommendTwoItem(dataLeft, dataRight) {
 }
 
 _rendProductItem(data) {
+  if(data == ""){
+    return Container();
+  }
   return AspectRatio(
     aspectRatio: 0.8,
     child: Card(

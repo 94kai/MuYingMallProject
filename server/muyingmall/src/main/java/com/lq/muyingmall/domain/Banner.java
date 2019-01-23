@@ -1,24 +1,20 @@
 package com.lq.muyingmall.domain;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Banner {
     @Id
-    @GeneratedValue
+    @JsonAlias("jump_value")
     private long id;
-    @Column(nullable = false, unique = true)
-    String bannerImg;
+    @Column(nullable = false)
+    private String url;
 
     public Banner() {
-    }
-
-
-    public Banner(String bannerImg) {
-        this.bannerImg = bannerImg;
     }
 
     public long getId() {
@@ -29,11 +25,11 @@ public class Banner {
         this.id = id;
     }
 
-    public String getBannerImg() {
-        return bannerImg;
+    public String getUrl() {
+        return url;
     }
 
-    public void setBannerImg(String bannerImg) {
-        this.bannerImg = bannerImg;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
