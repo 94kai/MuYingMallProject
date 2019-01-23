@@ -44,7 +44,8 @@ _buildProductTwoItem(dataLeft, dataRight) {
 }
 
 _rendProductItem(data) {
-  if(data == ""){
+  print(data);
+  if (data == "") {
     return Container();
   }
   return AspectRatio(
@@ -53,16 +54,57 @@ _rendProductItem(data) {
       child: Column(
         children: <Widget>[
           Padding(
-            child: Image.network(data['image']),
+            child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+              return Image.network(data['image'],width: constraints.maxWidth,height: constraints.maxWidth,);
+            }),
             padding: EdgeInsets.all(5),
           ),
-          Text(
-            data['title'],
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+          Container(
+            alignment: AlignmentDirectional.centerStart,
+            child: Text(
+              "  ${data['title']}",
+              maxLines: 1,
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 3.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Text(
+                      "  ￥",
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 8,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "${data['original_price']}",
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                Text(
+                  "已售${data['sell_num']}件  ",
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     ),
   );
 }
+
+//{ sell_num: 6736, original_price: 24.8, coupon_value: 5,title: 【4条装】男童纯棉平角舒适内裤, price_tag: 券后,}
