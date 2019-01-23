@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../view/productdetail/detail_root_view.dart';
+import '../view/productdetail/bottom_view.dart';
 
 class ProductDetailPage extends StatefulWidget {
   //商品列表传来的数据源
@@ -15,10 +17,10 @@ class ProductDetailPage extends StatefulWidget {
 class ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    if (widget.data['type'] == 'banner') {
-      return Text('banner');
-    }
-    return Text(widget.data['title']);
+    return Scaffold(
+      body: DetailRootView(),
+      bottomNavigationBar: BottomView(),
+
+    );
   }
 }
