@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../utils/network.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-
+import 'detail_base_info_view.dart';
 class DetailListView extends StatefulWidget {
   final headImageAspectRatio = 1.36;
   var headImageHeight;
@@ -48,83 +48,9 @@ class DetailListViewState extends State<DetailListView> {
 
   _buildItem(BuildContext context, int index) {
     if (index == 0) {
-      return AspectRatio(
-        aspectRatio: widget.headImageAspectRatio,
-        child: Container(
-          child: Swiper(
-              itemBuilder: (BuildContext context, int index) {
-                return Image.network(
-                  data['pic_list'][index],
-                  fit: BoxFit.fitWidth,
-                );
-              },
-              itemCount: data['pic_list'].length,
-              autoplay: false,
-              pagination: SwiperPagination(
-                  builder: DotSwiperPaginationBuilder(
-                      color: Colors.black54,
-                      activeColor: Colors.pink,
-                      size: 7,
-                      activeSize: 7))),
-          color: Colors.pink,
-        ),
-      );
+      return _buildImageView();
     } else if (index == 1) {
-      return Container(
-        padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-        color: Colors.white,
-        height: 100,
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(bottom: 10),
-              alignment: AlignmentDirectional.centerStart,
-              child: Text(
-                data['title'],
-                maxLines: 1,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.start,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Text(
-                      "￥",
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "${data['original_price']}",
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                Text(
-                  "已售${data['sell_num']}件  ",
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14,
-                  ),
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Row(children: _buildGoodsTag(data['goods_tag'])),
-              ],
-            ),
-          ],
-        ),
-      );
+      return DetailBaseInfoView(data);
     } else if (index == 2) {
       return Container(
         color: Colors.black12,
@@ -132,6 +58,33 @@ class DetailListViewState extends State<DetailListView> {
       );
     }
   }
+
+  ///构建头部轮播图view
+  _buildImageView() {
+    return AspectRatio(
+      aspectRatio: widget.headImageAspectRatio,
+      child: Container(
+        child: Swiper(
+            itemBuilder: (BuildContext context, int index) {
+              return Image.network(
+                data['pic_list'][index],
+                fit: BoxFit.fitWidth,
+              );
+            },
+            itemCount: data['pic_list'].length,
+            autoplay: false,
+            pagination: SwiperPagination(
+                builder: DotSwiperPaginationBuilder(
+                    color: Colors.black54,
+                    activeColor: Colors.pink,
+                    size: 7,
+                    activeSize: 7))),
+        color: Colors.pink,
+      ),
+    );
+  }
+
+
 
   bool dataNofify(Notification notification) {
     if (notification is ScrollUpdateNotification) {
@@ -151,23 +104,5 @@ class DetailListViewState extends State<DetailListView> {
       }
     }
     return true;
-  }
-
-  ///构建goodstag（包邮、运费险等）
-  _buildGoodsTag(goodsTag) {
-    return goodsTag
-        .map<Widget>((tag) => Row(
-              children: <Widget>[
-                Icon(Icons.bookmark_border,color: Color(0xFFFF8A80),)
-                ,
-                Text(
-                  tag,
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                )
-              ],
-            ))
-        .toList();
   }
 }
