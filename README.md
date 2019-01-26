@@ -1,10 +1,10 @@
 # 演示
 
- ![演示](https://github.com/kaikaixue/MuYingMallProject/image/screenshot.gif)
+ ![演示](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/screenshot.gif)
 
 # 全局
 
-### 用户系统
+### 用户
 
 1.登录之后换一个token回来，每次请求数据带上token，其他人利用同一账号登录之后token会被改变(每次登录都会重置)，所以上个用户就没法使用了。 
 
@@ -12,9 +12,9 @@
 
 3.服务端token存缓存，而不是数据库，查数据库费时。 
 
-### 分类系统 
+### 分类 
 
-1.TODO:请求分类添加接口，需要带上超级管理员账户(token或者直接用户名加密码)。服务端校验成功后才可以添加分类 
+1.请求分类添加接口，需要带上超级管理员账户(token或者直接用户名加密码)。服务端校验成功后才可以添加分类 
 
 2.TODO:商家上传商品信息可以选择分类 
 
@@ -53,7 +53,9 @@
 
 - userId+时间戳 进行md5产生token
 
-### 数据上传
+# 数据
+
+从某冷门app上扒来数据，稍微做了些处理，通过接口上传，具体的json数据在[这里](https://github.com/kaikaixue/MuYingMallProject/tree/master/data)
 
 1. 首页-热门-活动数据
 
