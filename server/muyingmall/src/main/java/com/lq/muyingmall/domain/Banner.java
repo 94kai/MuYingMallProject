@@ -14,6 +14,12 @@ public class Banner {
     @Column(nullable = false)
     private String url;
 
+    @Column()
+    private String title;
+
+    @Column()
+    private int sell_num;
+
     public Banner() {
     }
 
@@ -31,5 +37,21 @@ public class Banner {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getSell_num() {
+        return sell_num;
+    }
+
+    public void setSell_num(int sell_num) {
+        this.sell_num = sell_num;
     }
 }

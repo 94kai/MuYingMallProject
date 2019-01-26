@@ -69,7 +69,7 @@ class HotViewState extends State<HotView>
           itemBuilder: (BuildContext context, int index) {
             banners[index]['type'] = 'banner';
             return GestureDetector(
-              onTap: () => jumpToProductDetail(context, banners[index]),
+              onTap: () => jumpToProductDetail(context, banners[index]['id']),
               child: Image.network(
                 banners[index]['url'],
                 fit: BoxFit.fill,
@@ -94,7 +94,7 @@ class HotViewState extends State<HotView>
       return PromotionView(promotionList, newsList);
     } else {
       return buildProductList(
-          productList, index - 2, (data) => jumpToProductDetail(context, data));
+          productList, index - 2, (data) => jumpToProductDetail(context, data['id']));
     }
   }
 

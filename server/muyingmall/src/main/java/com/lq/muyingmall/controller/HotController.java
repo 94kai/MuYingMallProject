@@ -10,10 +10,12 @@ import com.lq.muyingmall.domain.ProductRepository;
 import com.lq.muyingmall.domain.Promotion;
 import com.lq.muyingmall.domain.PromotionGroup;
 import com.lq.muyingmall.domain.PromotionRepository;
+import com.lq.muyingmall.utils.TextUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -58,8 +60,20 @@ public class HotController {
         for (Banner banner : banners) {
             try {
                 bannerRepository.deleteById(banner.getId());
+                Product product = new Product();
+                product.setId(banner.getId());
+                product.setTitle(TextUtils.isEmpty(banner.getTitle())?"暂无标题":banner.getTitle());
+                product.setImage(banner.getUrl());
+                product.setSell_num(banner.getSell_num());
+                try {
+                    productRepository.deleteById(product.getId());
+                } catch (EmptyResultDataAccessException e) {
+                    logger.error("删除失败，并无大碍");
+                }
+                productRepository.save(product);
             } catch (Exception e) {
-                logger.error("删除错误，无所谓");
+                logger.error("添加错误");
+                e.printStackTrace();
             }
             bannerRepository.save(banner);
         }

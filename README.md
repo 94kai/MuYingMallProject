@@ -1,3 +1,7 @@
+# 演示
+
+ ![演示](https://github.com/kaikaixue/MuYingMallProject/image/screenshot.gif)
+
 # 全局
 
 ### 用户系统
@@ -15,6 +19,9 @@
 2.TODO:商家上传商品信息可以选择分类 
 
 # Server
+
+### 为你推荐
+- 通过分类id查出所有商品。随机抽取不重复的20个。如果商品数少于20，全部取出。
 
 ### 数据库编码
 
@@ -87,7 +94,7 @@
 
    ​
 
-​	
+	​	
 
 
 

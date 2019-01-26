@@ -30,7 +30,7 @@ class NormalViewState extends State<NormalView> with AutomaticKeepAliveClientMix
     // TODO: implement build
     return ListView.builder(
       padding: EdgeInsets.only(top: 10),
-      itemBuilder: (context, index) => buildProductList(productList, index,(data)=>jumpToProductDetail(context,data)),
+      itemBuilder: (context, index) => buildProductList(productList, index,(data)=>jumpToProductDetail(context,data['id'])),
     );
   }
 

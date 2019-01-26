@@ -123,7 +123,7 @@ class PromotionViewState extends State<PromotionView> {
               children: <Widget>[
                 Expanded(
                   child: GestureDetector(
-                      onTap: () => jumpToProductDetail(context, products[0]),
+                      onTap: () => jumpToProductDetail(context, products[0]['id']),
                       child: Padding(
                           padding: EdgeInsets.all(5),
                           child: AspectRatio(
@@ -134,7 +134,7 @@ class PromotionViewState extends State<PromotionView> {
                 ),
                 Expanded(
                   child: GestureDetector(
-                      onTap: () => jumpToProductDetail(context, products[1]),
+                      onTap: () => jumpToProductDetail(context, products[1]['id']),
                       child: Padding(
                         padding: EdgeInsets.all(5),
                         child: AspectRatio(
