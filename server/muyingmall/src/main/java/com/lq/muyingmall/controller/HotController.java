@@ -47,7 +47,7 @@ public class HotController {
         Page<Banner> banners = bannerRepository.findAll(PageRequest.of(0, 5, Sort.Direction.DESC, "id"));
 
         if (banners.isEmpty()) {
-            return new BaseResponse<>(-1, "无数据");
+            return new BaseResponse<>(-1, "无数据", null);
         } else {
             ArrayList<Banner> data = new ArrayList<>();
             banners.get().forEach(data::add);
@@ -62,7 +62,7 @@ public class HotController {
                 bannerRepository.deleteById(banner.getId());
                 Product product = new Product();
                 product.setId(banner.getId());
-                product.setTitle(TextUtils.isEmpty(banner.getTitle())?"暂无标题":banner.getTitle());
+                product.setTitle(TextUtils.isEmpty(banner.getTitle()) ? "暂无标题" : banner.getTitle());
                 product.setImage(banner.getUrl());
                 product.setSell_num(banner.getSell_num());
                 try {
@@ -89,7 +89,7 @@ public class HotController {
         ArrayList<Promotion> promotionsListData;
         ArrayList<News> newsListData = new ArrayList<>();
         if (promotionsList.isEmpty()) {
-            return new BaseResponse<>(-1, "暂无活动");
+            return new BaseResponse<>(-1, "暂无活动", null);
         } else {
             promotionsListData = new ArrayList<>();
             promotionsList.get().forEach(e -> {

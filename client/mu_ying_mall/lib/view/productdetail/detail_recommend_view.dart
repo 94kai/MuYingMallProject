@@ -67,5 +67,3 @@ class DetailRecomendView extends StatelessWidget {
     );
   }
 }
-
-//{title: 潍坊2019新款蓝蝴蝶风筝, sell_num: 161, original_price: 34.99,, image: htg_.webp, id: 18152768,}

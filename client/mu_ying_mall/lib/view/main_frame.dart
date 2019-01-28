@@ -11,7 +11,7 @@ PageView renderMainPageView(controller, onPageChange) {
     children: <Widget>[
       HomePage(),
       CommunityPage(),
-      ShoppingCarPage(),
+      ShoppingCartPage(),
       MyPage(),
     ],
   );

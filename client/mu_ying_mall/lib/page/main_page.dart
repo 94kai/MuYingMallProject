@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../view/main_frame.dart';
-
 final bottomTabBarData = [
   {"title": "首页", "icon": Icons.home},
   {"title": "社区", "icon": Icons.chat_bubble},

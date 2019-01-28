@@ -17,10 +17,11 @@ public class User implements Serializable {
     private long id;
     @Column(nullable = false, unique = true)
     private String userName;
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String nickName;
     @Column(nullable = false)
     private String passWord;
+
     /**
      * 用户类型 1.普通用户 2.商家 3.超级管理员。默认为1
      */

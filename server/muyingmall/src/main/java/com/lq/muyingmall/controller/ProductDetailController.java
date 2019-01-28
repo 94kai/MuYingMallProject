@@ -96,7 +96,7 @@ public class ProductDetailController {
 
             List<Product> products = productRepository.queryAllByCategoryId(product.getCategoryId());
             int recommendsCount = 10;
-            if (products.size()>0) {
+            if (products.size() > 0) {
                 if (products.size() < recommendsCount) {
                     productDetail.setRecommend(products);
                 } else {
@@ -116,7 +116,7 @@ public class ProductDetailController {
             }
             return new BaseResponse<>(0, productDetail);
         } else {
-            return new BaseResponse<>(-1, "不存在");
+            return new BaseResponse<>(-1, "不存在", null);
         }
 
 //        BaseResponse<String> response = new BaseResponse<>();

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-
-class ShoppingCarPage extends StatefulWidget {
+import '../view/shoppingcart/shopping_cart_view.dart';
+class ShoppingCartPage extends StatefulWidget {
   @override
-  ShoppingCarPageState createState() {
-    return new ShoppingCarPageState();
+  ShoppingCartPageState createState() {
+    return new ShoppingCartPageState();
   }
 }
 
-class ShoppingCarPageState extends State<ShoppingCarPage> {
+class ShoppingCartPageState extends State<ShoppingCartPage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-      color: Colors.deepOrange,
-      child: Center(
-        child: Text("ShoppingCarpage"),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("购物车"),
       ),
+      body: ShoppingCartView(),
     );
   }
 }

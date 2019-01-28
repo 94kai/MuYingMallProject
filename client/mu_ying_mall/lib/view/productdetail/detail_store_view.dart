@@ -28,7 +28,6 @@ _buildStoreInfoView(data) {
             width: 70,
             height: 70,
             fit: BoxFit.fill,
-//            color: Colors.redAccent,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),

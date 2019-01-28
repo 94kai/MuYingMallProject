@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../utils/jump.dart';
+import 'package:toast/toast.dart';
+import '../../utils/login_util.dart';
+import '../../page/login_page.dart';
+
 class BottomView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -9,7 +13,8 @@ class BottomView extends StatelessWidget {
           'icon': Icons.chat,
           'title': '客服',
           'flex': 3,
-          'click': () => print("暂未实现")
+          'click': () => Toast.show('暂未实现', context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM)
         },
         {
           'icon': Icons.shopping_cart,
@@ -17,9 +22,34 @@ class BottomView extends StatelessWidget {
           'flex': 3,
           'click': () => jumpToShoppingCart(context)
         },
-        {'title': '加入购物车', 'flex': 4, 'click': () => print("加购物车")},
+        {
+          'title': '加入购物车',
+          'flex': 4,
+          'click': () => _checkAddToShoppingCart(context)
+        },
       ]),
     );
+  }
+
+  ///加车前的登录校验
+  _checkAddToShoppingCart(context) {
+    checkLoginState().then((hasToken) {
+      if (hasToken) {
+        ///加车
+        _addToShoppingCart(context);
+      } else {
+        jumpToLogin(context, (result) {
+          ///加车
+          _addToShoppingCart(context);
+        });
+      }
+    });
+  }
+
+  ///加车操作
+  void _addToShoppingCart(context) {
+    //TODO: 加车
+    print("jiache");
   }
 }
 
