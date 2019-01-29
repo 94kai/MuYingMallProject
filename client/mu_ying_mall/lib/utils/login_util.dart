@@ -13,10 +13,28 @@ Future<String> getToken() async {
   return prefs.getString('token');
 }
 
+///获取username
+Future<String> getUserName() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getString('userName');
+}
+
+///获取username
+getUserNameAndToken(callback) async {
+  getToken().then(
+      (token) => getUserName().then((userName) => callback(userName, token)));
+}
+
 ///登录成功或者退出登录时，更新token
 _updateToken(token) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString('token', token);
+}
+
+///登录成功或者退出登录时，更新用户名
+_updateUserName(userName) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('userName', userName);
 }
 
 ///登录
@@ -26,6 +44,7 @@ login(userName, passWord, successCallback, errorCallback) {
       (data) {
         ///保存token
         _updateToken(data['token']);
+        _updateUserName(userName);
         successCallback(data);
       },
       params: {
@@ -35,8 +54,15 @@ login(userName, passWord, successCallback, errorCallback) {
       errorCallback: (error) {
         ///移除token
         _updateToken('');
+        _updateUserName('');
         errorCallback(error);
       });
+}
+
+///退出登录
+logout() {
+  _updateToken('');
+  _updateUserName('');
 }
 
 ///注册
@@ -45,6 +71,7 @@ register(userName, passWord, successCallback, errorCallback) {
       'register',
       (data) {
         _updateToken(data['token']);
+        _updateUserName(userName);
         successCallback(data);
       },
       params: {
@@ -54,6 +81,7 @@ register(userName, passWord, successCallback, errorCallback) {
       errorCallback: (error) {
         ///移除token
         _updateToken('');
+        _updateUserName('');
         errorCallback(error);
       });
 }

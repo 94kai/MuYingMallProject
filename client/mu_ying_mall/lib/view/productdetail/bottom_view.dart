@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import '../../utils/jump.dart';
 import 'package:toast/toast.dart';
 import '../../utils/login_util.dart';
-import '../../page/login_page.dart';
+import '../../utils/network.dart';
 
 class BottomView extends StatelessWidget {
+  var productId;
+
+  BottomView(this.productId);
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -48,8 +52,10 @@ class BottomView extends StatelessWidget {
 
   ///加车操作
   void _addToShoppingCart(context) {
-    //TODO: 加车
-    print("jiache");
+    getUserNameAndToken((userName, token) => get(
+        "addProductToCart", (data) => Toast.show("加入购物车成功", context),
+        params: {'userName': userName, 'productId': '$productId'},
+        headers: {'token': token}));
   }
 }
 

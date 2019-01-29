@@ -20,7 +20,7 @@ class ProductDetailPageState extends State<ProductDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: DetailRootView(widget.productId),
-      bottomNavigationBar: BottomView(),
+      bottomNavigationBar: BottomView(widget.productId),
     );
   }
 }

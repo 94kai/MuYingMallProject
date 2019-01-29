@@ -25,7 +25,7 @@ public class LoginController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //存放token的map
-    private Map<String, String> tokenMap = new HashMap<>();
+    public static Map<String, String> tokenMap = new HashMap<>();
     @Autowired
     UserRepository userRepository;
 

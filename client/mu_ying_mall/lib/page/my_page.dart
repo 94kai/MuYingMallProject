@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../utils/login_util.dart';
 class MyPage extends StatefulWidget {
   @override
   MyPagePageState createState() {
@@ -14,7 +14,10 @@ class MyPagePageState extends State<MyPage> {
     return Container(
       color: Colors.indigo,
       child: Center(
-        child: Text("mypage"),
+        child: GestureDetector(
+          child: Text("退出登录"),
+          onTap: ()=> logout(),
+        ),
       ),
     );
   }
