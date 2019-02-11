@@ -95,8 +95,8 @@ _request(String url, Function callback,
 
 _jumpToLogin(context) {
   if (context != null) {
-    jumpToLogin(context, (){});
-  }else{
+    jumpToLogin(context, (result) {});
+  } else {
     print("context is null");
   }
 }

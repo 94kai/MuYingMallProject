@@ -188,6 +188,14 @@ class ShoppingCartViewState extends State<ShoppingCartView> {
   ///构建底部view
   _buildBottomView() {
     if (_isLogin && _cartProductList.length > 0) {
+      double sum = 0;
+      _cartProductList.map((product) {
+        bool isChecked =
+            product['checked'] == null ? false : product['checked'];
+        if (isChecked) {
+          sum += product['original_price'];
+        }
+      }).toList();
       return Container(
           color: Colors.white,
           height: 50,
@@ -202,12 +210,13 @@ class ShoppingCartViewState extends State<ShoppingCartView> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "100",
+                    '$sum',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
-              Container(
+              GestureDetector(
+                  child: Container(
                 alignment: AlignmentDirectional.center,
                 height: 50,
                 width: 150,
@@ -216,6 +225,10 @@ class ShoppingCartViewState extends State<ShoppingCartView> {
                   style: TextStyle(color: Colors.white),
                 ),
                 color: Colors.pinkAccent,
+              ),
+                onTap: (){
+                    jumpToSettleAccount(context, sum);
+                },
               )
             ],
           ));
@@ -224,14 +237,10 @@ class ShoppingCartViewState extends State<ShoppingCartView> {
     }
   }
 
-  var checkState = {};
-
   ///构建加车的商品
   _buildCartProductItem(BuildContext context) {
     if (_cartProductList.length > 0) {
-      var index = -1;
       return _cartProductList.map<Widget>((product) {
-        index++;
         return Card(
           margin: EdgeInsets.all(10),
           child: Container(
@@ -241,9 +250,10 @@ class ShoppingCartViewState extends State<ShoppingCartView> {
             child: Row(
               children: <Widget>[
                 Checkbox(
-                    value: checkState[index]==null?false:checkState[index],
+                    value:
+                        product['checked'] == null ? false : product['checked'],
                     onChanged: (checked) => setState(() {
-                          checkState[index] = checked;
+                          product['checked'] = checked;
                         })),
                 Image.network(
                   product['image'],

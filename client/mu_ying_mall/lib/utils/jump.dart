@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../page/product_detail_page.dart';
 import '../page/shopping_car_page.dart';
 import '../page/login_page.dart';
+import '../page/settle_account_page.dart';
 
 ///跳商详
 jumpToProductDetail(context, productId) {
@@ -20,4 +21,10 @@ jumpToLogin(context, onResult) {
   Navigator.of(context)
       .push(MaterialPageRoute(builder: (context) => LoginPage()))
       .then((result) => onResult(result));
+}
+
+///跳结算页
+jumpToSettleAccount(context, totalMoney) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => SettleAccountPage(totalMoney)));
 }
