@@ -152,7 +152,7 @@ class LoginPageState extends State<LoginPage> {
       if ((_userNameController.text.isNotEmpty &&
           _userPassController.text.isNotEmpty)) {
         login(_userNameController.text, _userPassController.text, (data) {
-          Navigator.of(context).pop();
+          Navigator.of(context).pop(true);
         }, (error) {
           Toast.show("$error", context);
         });
@@ -168,7 +168,7 @@ class LoginPageState extends State<LoginPage> {
         Toast.show("两次输入的密码不一致", context);
       } else {
         register(_userNameController.text, _userPassController.text, (data) {
-          Navigator.of(context).pop();
+          Navigator.of(context).pop(true);
         }, (error) {
           Toast.show("$error", context);
         });

@@ -10,11 +10,10 @@ class CommunityPage extends StatefulWidget {
 class CommunityPageState extends State<CommunityPage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       color: Colors.amber,
       child: Center(
-        child: Text("Communitypage"),
+        child: Text("社区"),
       ),
     );
   }

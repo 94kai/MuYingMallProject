@@ -10,7 +10,6 @@ class ShoppingCartPage extends StatefulWidget {
 class ShoppingCartPageState extends State<ShoppingCartPage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

@@ -19,7 +19,7 @@ Future<String> getUserName() async {
   return prefs.getString('userName');
 }
 
-///获取username
+///获取username和token
 getUserNameAndToken(callback) async {
   getToken().then(
       (token) => getUserName().then((userName) => callback(userName, token)));

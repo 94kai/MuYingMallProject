@@ -36,6 +36,5 @@ class NormalViewState extends State<NormalView> with AutomaticKeepAliveClientMix
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }

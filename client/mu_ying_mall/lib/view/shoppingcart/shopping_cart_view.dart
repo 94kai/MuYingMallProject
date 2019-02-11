@@ -23,13 +23,7 @@ class ShoppingCartViewState extends State<ShoppingCartView> {
   void initState() {
     super.initState();
 
-    checkLoginState().then((isLogin) => _onLoginStateReturn(isLogin));
-
-    get("queryProductsByCategory", (productList) {
-      setState(() {
-        _productList = productList;
-      });
-    }, params: {"categoryId": "-1"});
+    _refureshCart();
   }
 
   @override
@@ -126,8 +120,11 @@ class ShoppingCartViewState extends State<ShoppingCartView> {
               Row(
                 children: <Widget>[
                   GestureDetector(
-                    onTap: () =>
-                        jumpToLogin(context, (result) => print("登录完了，刷购物车")),
+                    onTap: () => jumpToLogin(context, (result) {
+                          if (result != null && result) {
+                            _refureshCart();
+                          }
+                        }),
                     child: Text(
                       '登录',
                       style: TextStyle(fontSize: 18, color: Colors.blue),
@@ -216,18 +213,18 @@ class ShoppingCartViewState extends State<ShoppingCartView> {
                 ],
               ),
               GestureDetector(
-                  child: Container(
-                alignment: AlignmentDirectional.center,
-                height: 50,
-                width: 150,
-                child: Text(
-                  "去结算",
-                  style: TextStyle(color: Colors.white),
+                child: Container(
+                  alignment: AlignmentDirectional.center,
+                  height: 50,
+                  width: 150,
+                  child: Text(
+                    "去结算",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: Colors.pinkAccent,
                 ),
-                color: Colors.pinkAccent,
-              ),
-                onTap: (){
-                    jumpToSettleAccount(context, sum);
+                onTap: () {
+                  jumpToSettleAccount(context, sum);
                 },
               )
             ],
@@ -306,5 +303,15 @@ class ShoppingCartViewState extends State<ShoppingCartView> {
         );
       }).toList();
     }
+  }
+
+  void _refureshCart() {
+    checkLoginState().then((isLogin) => _onLoginStateReturn(isLogin));
+
+    get("queryProductsByCategory", (productList) {
+      setState(() {
+        _productList = productList;
+      });
+    }, params: {"categoryId": "-1"});
   }
 }
