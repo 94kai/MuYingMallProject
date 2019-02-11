@@ -55,7 +55,8 @@ class BottomView extends StatelessWidget {
     getUserNameAndToken((userName, token) => get(
         "addProductToCart", (data) => Toast.show("加入购物车成功", context),
         params: {'userName': userName, 'productId': '$productId'},
-        headers: {'token': token}));
+        headers: {'token': token},
+        context: context));
   }
 }
 

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'jump.dart';
 
 final baseUrl = "http://10.0.2.2:8080/api/";
 
@@ -10,7 +11,8 @@ const POST = "post";
 get(String path, Function callback,
     {Map<String, String> params,
     Map<String, String> headers,
-    Function errorCallback}) async {
+    Function errorCallback,
+    context}) async {
   if (params != null && params.isNotEmpty) {
     StringBuffer sb = new StringBuffer("?");
     params.forEach((key, value) {
@@ -21,7 +23,10 @@ get(String path, Function callback,
     path += paramStr;
   }
   await _request("$baseUrl$path", callback,
-      method: GET, headers: headers, errorCallback: errorCallback);
+      method: GET,
+      headers: headers,
+      errorCallback: errorCallback,
+      context: context);
 }
 
 post(String path, Function callback,
@@ -39,7 +44,8 @@ _request(String url, Function callback,
     {String method,
     Map<String, String> headers,
     Map<String, String> params,
-    Function errorCallback}) async {
+    Function errorCallback,
+    context}) async {
   print("请求url:$url");
 
   String errorMsg;
@@ -75,11 +81,23 @@ _request(String url, Function callback,
       if (errorCode >= 0) {
         callback(data);
       } else {
-        _handError(errorCallback, errorMsg);
+        if (errorMsg.contains('token校验失败')) {
+          _jumpToLogin(context);
+        } else {
+          _handError(errorCallback, errorMsg);
+        }
       }
     }
   } catch (exception) {
     _handError(errorCallback, exception.toString());
+  }
+}
+
+_jumpToLogin(context) {
+  if (context != null) {
+    jumpToLogin(context, (){});
+  }else{
+    print("context is null");
   }
 }
 
