@@ -1,4 +1,4 @@
-# 演示
+# 演示（图片较大，请耐心等待）
 
  ![演示](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/screenshot.gif)
 
