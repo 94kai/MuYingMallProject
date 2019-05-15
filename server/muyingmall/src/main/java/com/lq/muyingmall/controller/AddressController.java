@@ -28,7 +28,7 @@ public class AddressController {
     }
 
     @RequestMapping(value = "/addAddress", method = {RequestMethod.GET})
-    public BaseResponse queryAllAddressByUserName(String consignee, String address, String phoneNumber, String userName) {
+    public BaseResponse addAddress(String consignee, String address, String phoneNumber, String userName) {
         Address addressBean = new Address();
         addressBean.setAddress(address);
         addressBean.setConsignee(consignee);
@@ -66,6 +66,19 @@ public class AddressController {
         addressBean.setUserName(userName);
         try {
             addressRepository.save(addressBean);
+        } catch (Exception e) {
+            return new BaseResponse<>(-1, "error");
+        }
+        return new BaseResponse<>(0, "success");
+    }
+    @RequestMapping(value = "/deleteAddress", method = {RequestMethod.GET})
+    public BaseResponse deleteAddress(long addressId) {
+        Address addressById = addressRepository.findAddressById(addressId);
+        if (addressById == null) {
+            return new BaseResponse<>(-1, "不存在该地址");
+        }
+        try {
+            addressRepository.delete(addressById);
         } catch (Exception e) {
             return new BaseResponse<>(-1, "error");
         }
