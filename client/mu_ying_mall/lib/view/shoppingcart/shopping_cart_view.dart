@@ -224,7 +224,7 @@ class ShoppingCartViewState extends State<ShoppingCartView> {
                   color: Colors.pinkAccent,
                 ),
                 onTap: () {
-                  jumpToSettleAccount(context, sum);
+                  jumpToAddress(context, sum);
                 },
               )
             ],

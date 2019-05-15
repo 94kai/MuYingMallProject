@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../page/product_detail_page.dart';
-import '../page/shopping_car_page.dart';
-import '../page/login_page.dart';
-import '../page/settle_account_page.dart';
+import 'package:mu_ying_mall/page/product_detail_page.dart';
+import 'package:mu_ying_mall/page/shopping_car_page.dart';
+import 'package:mu_ying_mall/page/login_page.dart';
+import 'package:mu_ying_mall/page/settle_account_page.dart';
+import 'package:mu_ying_mall/page/address_page.dart';
+import 'package:mu_ying_mall/page/edit_address_page.dart';
 
 ///跳商详
 jumpToProductDetail(context, productId) {
@@ -23,8 +25,21 @@ jumpToLogin(context, onResult) {
       .then((result) => onResult(result));
 }
 
+///跳收货地址页
+jumpToAddress(context, totalMoney) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => AddressPage(totalMoney)));
+}
+
+///跳收货地址编辑页
+jumpToEditAddress(context, address, userName,onResult) {
+  Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => EditAddressPage(address, userName)))
+      .then((result) => onResult(result));
+}
+
 ///跳结算页
 jumpToSettleAccount(context, totalMoney) {
-  Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => SettleAccountPage(totalMoney)));
+  Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => SettleAccountPage(totalMoney)));
 }

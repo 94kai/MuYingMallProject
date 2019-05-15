@@ -10,7 +10,6 @@ class ProductDetailPage extends StatefulWidget {
 
   @override
   ProductDetailPageState createState() {
-    print(productId);
     return new ProductDetailPageState();
   }
 }
