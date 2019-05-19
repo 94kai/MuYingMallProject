@@ -11,6 +11,8 @@ import 'package:mu_ying_mall/page/product_manager_page.dart';
 import 'package:mu_ying_mall/page/promotio_manager_page.dart';
 import 'package:mu_ying_mall/page/category_manager_page.dart';
 import 'package:mu_ying_mall/page/news_manager_page.dart';
+import 'package:mu_ying_mall/page/edit_other_page.dart';
+import 'package:mu_ying_mall/page/edit_product_page.dart';
 
 ///跳商详
 jumpToProductDetail(context, productId) {
@@ -45,12 +47,18 @@ jumpToEditAddress(context, address, userName, onResult) {
       .then((result) => onResult(result));
 }
 
-///跳分类编辑页
-jumpToEditCategory(context, category, onResult) {
-//  Navigator.of(context)
-//      .push(MaterialPageRoute(
-//      builder: (context) => EditAddressPage(category)))
-//      .then((result) => onResult(result));
+///跳分类、资讯、活动编辑页
+jumpToEdit(context, from, data, onResult) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => EditOtherPage(from, data)))
+      .then((result) => onResult(result));
+}
+
+///跳分类、资讯、活动编辑页
+jumpToProductEdit(context, data, onResult) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => EditProductPage(data)))
+      .then((result) => onResult(result));
 }
 
 ///跳结算页
@@ -61,37 +69,40 @@ jumpToSettleAccount(context, totalMoney) {
 
 ///跳客户端首页
 jumpToClient(context) {
-  Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => MainPage()));
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => MainPage()));
 //  Navigator.pushReplacement(context,
 //      MaterialPageRoute(builder: (BuildContext context) => MainPage()));
 }
 
 ///跳服务端首页
 jumpToServer(context) {
-  Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => ServerHomePage()));
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => ServerHomePage()));
 //  Navigator.pushReplacement(context,
 //      MaterialPageRoute(builder: (BuildContext context) => ServerHomePage()));
 }
 
 ///跳商品管理
 jumpToProductManager(context) {
-  Navigator.of(context).push(
-      MaterialPageRoute(builder: (BuildContext context) => ProductManagerPage()));
+  Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => ProductManagerPage()));
 }
+
 ///跳分类管理
 jumpToCategoryManager(context) {
-  Navigator.of(context).push(
-      MaterialPageRoute(builder: (BuildContext context) => CategoryManagerPage()));
+  Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => CategoryManagerPage()));
 }
+
 ///跳资讯管理
 jumpToNewsManager(context) {
   Navigator.of(context).push(
       MaterialPageRoute(builder: (BuildContext context) => NewsManagerPage()));
 }
+
 ///跳资讯管理
 jumpToPromotionManager(context) {
-  Navigator.of(context).push(
-      MaterialPageRoute(builder: (BuildContext context) => PromotionManagerPage()));
+  Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => PromotionManagerPage()));
 }

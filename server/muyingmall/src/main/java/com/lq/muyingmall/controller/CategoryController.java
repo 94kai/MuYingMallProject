@@ -7,6 +7,7 @@ import com.lq.muyingmall.domain.CategoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/queryAllCategory", method = {RequestMethod.GET})
     public BaseResponse<List<Category>> findAllCategory() {
-        List<Category> categoryList = categoryRepository.findAll();
+        List<Category> categoryList = categoryRepository.findAll(Sort.by(Sort.Direction.ASC,"categoryId"));
         return new BaseResponse<>(0, categoryList);
     }
 
@@ -51,29 +52,4 @@ public class CategoryController {
     }
 
 
-//    @RequestMapping(value = "/addCategory", method = {RequestMethod.POST})
-//    public String addCategory(String context, @RequestHeader(value = "token", required = false) String token) {
-//        logger.info("hhhhh=======" + context);
-//        return "hhhhh";
-//    }
-//
-//    @RequestMapping(value = "/register", method = {RequestMethod.POST})
-//    public BaseResponse register(@RequestBody User user) {
-//        User tempUser = userRepository.findByUserName(user.getUserName());
-//        if (tempUser != null) {
-//            return new BaseResponse(-1, "用户名被占用", "");
-//        }
-//        User save = userRepository.save(user);
-//        String token = getTokenByUserName(save.getUserName());
-//        tokenMap.put(save.getUserName(), token);
-//        return new BaseResponse(0, "注册成功", token);
-//    }
-//
-//
-//    /**
-//     * 通过username获取token
-//     */
-//    private String getTokenByUserName(String userName) {
-//        return DigestUtils.md5DigestAsHex((userName + System.currentTimeMillis()).getBytes());
-//    }
 }

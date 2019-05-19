@@ -4,11 +4,15 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Product {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
     private long id;
     @Column()
@@ -24,7 +28,9 @@ public class Product {
     private int categoryId;
     @Column()
     private int promotionId;
+    @Transient
     private String categoryName;
+    @Transient
     private String promotionName;
 
     public Product() {

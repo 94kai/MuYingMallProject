@@ -80,11 +80,23 @@ public class HotController {
         return new BaseResponse<>(0, "banner添加成功");
     }
 
+    @RequestMapping(value = "/addPromotion", method = {RequestMethod.GET})
+    public BaseResponse addPromotion(String title) {
+        try {
+            Promotion promotion = new Promotion();
+            promotion.setTitle(title);
+            promotionRepository.save(promotion);
+        } catch (Exception e) {
+            return new BaseResponse<>(-1, "addPromotion失败");
+        }
+        return new BaseResponse<>(0, "addPromotion成功");
+    }
+
 
     @RequestMapping(value = "/queryHotPromotion", method = {RequestMethod.GET})
     public BaseResponse<PromotionGroup> queryHotPromotion() {
 
-        Page<Promotion> promotionsList = promotionRepository.findAll(PageRequest.of(0, 6, Sort.Direction.DESC, "id"));
+        Page<Promotion> promotionsList = promotionRepository.findAll(PageRequest.of(0, 6, Sort.Direction.DESC, "pomotionId"));
         Page<News> newsList = newsRepository.findAll(PageRequest.of(0, 3, Sort.Direction.DESC, "id"));
         ArrayList<Promotion> promotionsListData;
         ArrayList<News> newsListData = new ArrayList<>();
@@ -95,6 +107,7 @@ public class HotController {
             promotionsList.get().forEach(e -> {
                 List<Product> products = productRepository.queryAllByPromotionId(e.getPomotionId());
                 if (products.size() > 1) {
+                    products.sort((o1, o2) -> (int) (o2.getId() - o1.getId()));
                     e.setProductsList(products);
                     promotionsListData.add(e);
                 }
@@ -120,10 +133,7 @@ public class HotController {
     @RequestMapping(value = "/addHotPromotion", method = {RequestMethod.POST})
     public BaseResponse addHotPromotion(@RequestBody List<Promotion> promotions) {
         try {
-            for (Promotion promotion : promotions) {
-                promotionRepository.deleteAllByPomotionId(promotion.getPomotionId());
-                promotionRepository.save(promotion);
-            }
+            promotionRepository.saveAll(promotions);
             return new BaseResponse(0);
         } catch (Exception e) {
             return new BaseResponse(-1, "添加失败");

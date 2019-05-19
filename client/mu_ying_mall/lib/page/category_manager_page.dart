@@ -52,12 +52,15 @@ class CategoryManagerState extends State<CategoryManagerPage> {
                       "增加分类",
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
-                    onTap: () =>
-                        jumpToEditCategory(context, null, _onBackFromEdit),
+                    onTap: () => _jumpToEdit(null),
                   )),
             ],
           ),
         ));
+  }
+
+  _jumpToEdit(data) {
+    jumpToEdit(context, "category", data, _onBackFromEdit);
   }
 
   //从编辑页回来
@@ -80,7 +83,9 @@ class CategoryManagerState extends State<CategoryManagerPage> {
       children: <Widget>[
         Row(
           children: <Widget>[
-            Container(width: 20,),
+            Container(
+              width: 20,
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,8 +109,7 @@ class CategoryManagerState extends State<CategoryManagerPage> {
                 Icons.mode_edit,
                 color: Colors.grey,
               ),
-              onTap: () =>
-                  jumpToEditCategory(context, category, _onBackFromEdit),
+              onTap: () => _jumpToEdit(category),
             ),
             Container(
               width: 20,

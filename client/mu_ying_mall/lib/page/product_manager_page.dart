@@ -53,12 +53,15 @@ class ProductManagerState extends State<ProductManagerPage> {
                       "增加商品",
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
-                    onTap: () =>
-                        jumpToEditCategory(context, null, _onBackFromEdit),
+                    onTap: () => _jumpToEdit(null),
                   )),
             ],
           ),
         ));
+  }
+
+  _jumpToEdit(data) {
+    jumpToProductEdit(context, data, _onBackFromEdit);
   }
 
   //从编辑页回来
@@ -137,8 +140,7 @@ class ProductManagerState extends State<ProductManagerPage> {
                 Icons.mode_edit,
                 color: Colors.grey,
               ),
-              onTap: () =>
-                  jumpToEditCategory(context, product, _onBackFromEdit),
+              onTap: () => _jumpToEdit(product),
             ),
             Container(
               width: 20,

@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,6 +46,42 @@ public class ProductController {
         return new BaseResponse(0, "添加成功");
     }
 
+    @RequestMapping(value = "/appProduct", method = {RequestMethod.POST})
+    public BaseResponse addProduct(@RequestBody Product product) {
+        logger.error("addProduct");
+        try {
+            productRepository.deleteById(product.getId());
+        } catch (EmptyResultDataAccessException e) {
+            logger.error("删除失败，并无大碍");
+        }
+        productRepository.save(product);
+        return new BaseResponse(0, "添加成功");
+    }
+
+    @RequestMapping(value = "/updateProduct", method = {RequestMethod.POST})
+    public BaseResponse updateProduct(@RequestBody Product product) {
+        logger.error("updateProduct");
+        try {
+            productRepository.deleteById(product.getId());
+        } catch (EmptyResultDataAccessException e) {
+            return new BaseResponse(-1, "更新必须要先删除行");
+        }
+        productRepository.save(product);
+        return new BaseResponse(0, "添加成功");
+    }
+
+    @RequestMapping(value = "/deleteProduct", method = {RequestMethod.GET})
+    public BaseResponse deleteProduct(long productId) {
+        try {
+            productRepository.deleteById(productId);
+        } catch (EmptyResultDataAccessException e) {
+            logger.error("删除失败，并无大碍");
+            return new BaseResponse(-1, "删除失败");
+        }
+        return new BaseResponse(0, "删除成功");
+    }
+
+
     /**
      * 查询商品列表，通过分类id，如果传入-1，返回所有列表
      *
@@ -56,9 +93,10 @@ public class ProductController {
         List<Product> products;
 
         if (categoryId == -1) {
-            products = productRepository.findAll();
+            products = productRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         } else {
             products = productRepository.queryAllByCategoryId(categoryId);
+            products.sort((o1, o2) -> (int) (o2.getId() - o1.getId()));
         }
         for (Product product : products) {
             int categoryId1 = product.getCategoryId();

@@ -33,7 +33,6 @@ class EditAddressPageState extends State<EditAddressPage> {
   @override
   void initState() {
     super.initState();
-    print(widget.address);
     controllers.add(_controller1);
     controllers.add(_controller2);
     controllers.add(_controller3);

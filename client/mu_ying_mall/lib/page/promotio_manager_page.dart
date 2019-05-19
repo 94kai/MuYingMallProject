@@ -54,12 +54,15 @@ class PromotionManagerState extends State<PromotionManagerPage> {
                       "增加活动",
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
-                    onTap: () =>
-                        jumpToEditCategory(context, null, _onBackFromEdit),
+                    onTap: () => _jumpToEdit(null),
                   )),
             ],
           ),
         ));
+  }
+
+  _jumpToEdit(data) {
+    jumpToEdit(context, "promotion", data, _onBackFromEdit);
   }
 
   //从编辑页回来
@@ -108,7 +111,7 @@ class PromotionManagerState extends State<PromotionManagerPage> {
                 Icons.mode_edit,
                 color: Colors.grey,
               ),
-              onTap: () => jumpToEditCategory(context, news, _onBackFromEdit),
+              onTap: () => _jumpToEdit(news),
             ),
             Container(
               width: 20,

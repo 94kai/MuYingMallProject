@@ -23,6 +23,7 @@ dependencies:
   dio: 1.0.13  # 网络请求库
   toast: ^0.1.3 # toast库
   shared_preferences: ^0.4.2 # 数据持久化库
+  flutter_picker: ^1.0.11
 
 dev_dependencies:
   flutter_test:

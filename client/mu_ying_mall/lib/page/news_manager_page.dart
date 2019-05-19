@@ -11,7 +11,8 @@ class NewsManagerPage extends StatefulWidget {
 }
 
 class NewsManagerState extends State<NewsManagerPage> {
-  var _newsAndPromotion ={};
+  var _newsAndPromotion = {};
+
   @override
   void initState() {
     super.initState();
@@ -49,16 +50,18 @@ class NewsManagerState extends State<NewsManagerPage> {
                   color: Colors.red,
                   alignment: AlignmentDirectional.center,
                   child: GestureDetector(
-                    child: Text(
-                      "增加活动",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                    onTap: () =>
-                        jumpToEditCategory(context, null, _onBackFromEdit),
-                  )),
+                      child: Text(
+                        "增加活动",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      onTap: () => _jumpToEdit(null))),
             ],
           ),
         ));
+  }
+
+  _jumpToEdit(data) {
+    jumpToEdit(context, "news", data, _onBackFromEdit);
   }
 
   //从编辑页回来
@@ -81,7 +84,9 @@ class NewsManagerState extends State<NewsManagerPage> {
       children: <Widget>[
         Row(
           children: <Widget>[
-            Container(width: 20,),
+            Container(
+              width: 20,
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,13 +106,11 @@ class NewsManagerState extends State<NewsManagerPage> {
               ),
             ),
             GestureDetector(
-              child: Icon(
-                Icons.mode_edit,
-                color: Colors.grey,
-              ),
-              onTap: () =>
-                  jumpToEditCategory(context, news, _onBackFromEdit),
-            ),
+                child: Icon(
+                  Icons.mode_edit,
+                  color: Colors.grey,
+                ),
+                onTap: () => _jumpToEdit(news)),
             Container(
               width: 20,
             )
@@ -122,4 +125,3 @@ class NewsManagerState extends State<NewsManagerPage> {
     );
   }
 }
-

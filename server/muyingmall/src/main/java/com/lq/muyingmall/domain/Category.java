@@ -12,24 +12,13 @@ import javax.persistence.Id;
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Category implements Serializable {
-    @Id
-    @GeneratedValue
-    private long id;
     @Column(nullable = false, unique = true)
     private String categoryName;
-
-    @Column(nullable = false, unique = true)
+    @Id
+    @GeneratedValue
     private int categoryId;
 
     public Category() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getCategoryName() {
