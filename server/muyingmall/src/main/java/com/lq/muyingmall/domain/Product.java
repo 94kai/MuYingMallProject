@@ -24,8 +24,26 @@ public class Product {
     private int categoryId;
     @Column()
     private int promotionId;
+    private String categoryName;
+    private String promotionName;
 
     public Product() {
+    }
+
+    public String getPromotionName() {
+        return promotionName;
+    }
+
+    public void setPromotionName(String promotionName) {
+        this.promotionName = promotionName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public long getId() {
