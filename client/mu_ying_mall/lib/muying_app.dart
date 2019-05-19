@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'page/main_page.dart';
+import 'page/function_choose_page.dart';
 class MuYingApp extends StatefulWidget{
   @override
   MuYingAppState createState() {
@@ -15,7 +16,7 @@ class MuYingAppState extends State<MuYingApp> {
       title: "母婴商城",
       theme: new ThemeData(
         primarySwatch: Colors.pink,),
-      home: MainPage(),
+      home: FunctionChoosePage(),
     );
   }
 }
