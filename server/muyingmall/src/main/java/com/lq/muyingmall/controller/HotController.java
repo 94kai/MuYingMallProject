@@ -80,6 +80,28 @@ public class HotController {
         return new BaseResponse<>(0, "banner添加成功");
     }
 
+    @RequestMapping(value = "/updatePromotion", method = {RequestMethod.GET})
+    public BaseResponse updatePromotion(int promotionId,String title) {
+        logger.error("updatePromotion");
+        try {
+            promotionRepository.update(title,promotionId);
+        } catch (Exception e) {
+            return new BaseResponse(-1, "失败");
+        }
+        return new BaseResponse(0, "updatePromotion成功");
+    }
+
+    @RequestMapping(value = "/updateNews", method = {RequestMethod.GET})
+    public BaseResponse updateNews(int id,String news) {
+        logger.error("updateNews");
+        try {
+            newsRepository.update(news,id);
+        } catch (Exception e) {
+            return new BaseResponse(-1, "updateNews失败");
+        }
+        return new BaseResponse(0, "updateNews成功");
+    }
+
     @RequestMapping(value = "/addPromotion", method = {RequestMethod.GET})
     public BaseResponse addPromotion(String title) {
         try {
@@ -92,6 +114,53 @@ public class HotController {
         return new BaseResponse<>(0, "addPromotion成功");
     }
 
+    @RequestMapping(value = "/addNews", method = {RequestMethod.GET})
+    public BaseResponse addNews(String news) {
+        try {
+            News news1 = new News();
+            news1.setNews(news);
+            newsRepository.save(news1);
+        } catch (Exception e) {
+            return new BaseResponse<>(-1, "addNews失败");
+        }
+        return new BaseResponse<>(0, "addNews成功");
+    }
+
+    @RequestMapping(value = "/queryAllHotPromotion", method = {RequestMethod.GET})
+    public BaseResponse<PromotionGroup> queryAllHotPromotion() {
+        List<News> newsListData;
+        List<Promotion> promotionsListData;
+
+        promotionsListData = promotionRepository.findAll(Sort.by(Sort.Direction.DESC, "pomotionId"));
+        newsListData = newsRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        if (newsListData.size() == 0) {
+            News news = new News();
+            news.setNews("暂无新闻");
+            newsListData.add(news);
+        }
+
+        if (newsListData.size() == 0) {
+            News news = new News();
+            news.setNews("暂无新闻");
+            newsListData.add(news);
+        }
+
+        if (promotionsListData.isEmpty()) {
+            return new BaseResponse<>(-1, "暂无活动", null);
+        } else {
+            promotionsListData.forEach(promotion -> {
+                List<Product> products = productRepository.queryAllByPromotionId(promotion.getPomotionId());
+                if (products.size() > 1) {
+                    products.sort((o1, o2) -> (int) (o2.getId() - o1.getId()));
+                    promotion.setProductsList(products);
+                }
+            });
+        }
+        PromotionGroup promotionGroup = new PromotionGroup();
+        promotionGroup.setNewsList(newsListData);
+        promotionGroup.setPromotionList(promotionsListData);
+        return new BaseResponse<>(0, promotionGroup);
+    }
 
     @RequestMapping(value = "/queryHotPromotion", method = {RequestMethod.GET})
     public BaseResponse<PromotionGroup> queryHotPromotion() {
@@ -125,8 +194,6 @@ public class HotController {
         promotionGroup.setNewsList(newsListData);
         promotionGroup.setPromotionList(promotionsListData);
         return new BaseResponse<>(0, promotionGroup);
-
-
     }
 
 
@@ -137,6 +204,28 @@ public class HotController {
             return new BaseResponse(0);
         } catch (Exception e) {
             return new BaseResponse(-1, "添加失败");
+        }
+    }
+
+    @RequestMapping(value = "/deletePromotion", method = {RequestMethod.GET})
+    public BaseResponse deletePromotion(int promotionId) {
+        try {
+            promotionRepository.deleteById(promotionId);
+            return new BaseResponse(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new BaseResponse(-1, "删除失败");
+        }
+    }
+
+    @RequestMapping(value = "/deleteNews", method = {RequestMethod.GET})
+    public BaseResponse deleteNews(long id) {
+        try {
+            newsRepository.deleteById(id);
+            return new BaseResponse(0,"成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new BaseResponse(-1, "删除失败");
         }
     }
 

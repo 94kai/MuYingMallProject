@@ -283,7 +283,7 @@ class EditProductPageState extends State<EditProductPage> {
 
   _showSelector(index) {
     if (index == 0) {
-      get("queryHotPromotion", (newsAndPromotion) {
+      get("queryAllHotPromotion", (newsAndPromotion) {
         setState(() {
           promotionList = newsAndPromotion["promotionList"];
         });

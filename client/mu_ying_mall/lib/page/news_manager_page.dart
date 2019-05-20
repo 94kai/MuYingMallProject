@@ -70,7 +70,7 @@ class NewsManagerState extends State<NewsManagerPage> {
   }
 
   refreshData() {
-    get("queryHotPromotion", (newsAndPromotion) {
+    get("queryAllHotPromotion", (newsAndPromotion) {
       setState(() {
         _newsAndPromotion = newsAndPromotion;
       });

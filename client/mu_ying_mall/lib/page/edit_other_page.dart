@@ -22,15 +22,12 @@ class EditOtherPageState extends State<EditOtherPage> {
 
   var _focusNode1 = FocusNode();
 
-  var hintTips = new TextStyle(fontSize: 18.0, color: Colors.black);
+  var tips = new TextStyle(fontSize: 18.0, color: Colors.black);
 
   @override
   void initState() {
     super.initState();
     switch (widget.from) {
-      case "product":
-        field = "商品";
-        break;
       case "category":
         field = "categoryName";
         break;
@@ -58,9 +55,6 @@ class EditOtherPageState extends State<EditOtherPage> {
   Widget build(BuildContext context) {
     prefix = widget.data == null ? "添加" : "编辑";
     switch (widget.from) {
-      case "product":
-        suffix = "商品";
-        break;
       case "category":
         suffix = "分类";
         break;
@@ -113,7 +107,7 @@ class EditOtherPageState extends State<EditOtherPage> {
                       "保存",
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
-                    onTap: () => saveAddress(),
+                    onTap: () => saveData(),
                   )),
             ],
           ),
@@ -126,11 +120,33 @@ class EditOtherPageState extends State<EditOtherPage> {
       Toast.show("删除失败", context);
       return;
     }
-    get("deleteAddress", (response) => Navigator.of(context).pop(true),
+    print(widget.data);
+    print(widget.from);
+    var functionId;
+    var field;
+    var fieldValue;
+    switch (widget.from) {
+      case "category":
+        functionId = "deleteCategory";
+        field = "id";
+        fieldValue = "categoryId";
+        break;
+      case "news":
+        functionId = "deleteNews";
+        field = "id";
+        fieldValue = "id";
+        break;
+      case "promotion":
+        functionId = "deletePromotion";
+        field = "promotionId";
+        fieldValue = "pomotionId";
+        break;
+    }
+    get(functionId, (response) => Navigator.of(context).pop(true),
         params: {
-          "addressId": "${widget.data['id']}",
+          field: "${widget.data["${fieldValue}"]}",
         },
-        errorCallback: () => Toast.show("删除失败", context));
+        errorCallback: (msg) => Toast.show("删除失败", context));
   }
 
   _renderItem(String name, String hint) {
@@ -155,7 +171,7 @@ class EditOtherPageState extends State<EditOtherPage> {
                   Expanded(
                     child: TextField(
                       focusNode: _focusNode1,
-                      style: hintTips,
+                      style: tips,
                       controller: _controller1,
                       decoration: new InputDecoration(
                         hintText: hint,
@@ -181,33 +197,60 @@ class EditOtherPageState extends State<EditOtherPage> {
         ));
   }
 
-
   //保存
-  saveAddress() {
+  saveData() {
     if (_controller1.text.isEmpty) {
       Toast.show("请完善信息", context);
       return;
     }
+    print(widget.data);
+    var functionIdAdd;
+    var functionIdUpdate;
+    var field;
+    var fieldId;
+    var fieldIdName;
+    var fieldValue;
+    switch (widget.from) {
+      case "category":
+        functionIdAdd = "addCategory";
+        functionIdUpdate = "updateCategory";
+        field = "name";
+        fieldId = "id";
+        fieldIdName = "categoryId";
+        fieldValue = "name";
+        break;
+      case "news":
+        functionIdAdd = "addNews";
+        functionIdUpdate = "updateNews";
+        field = "news";
+        fieldId = "id";
+        fieldIdName = "id";
+        fieldValue = "news";
+        break;
+      case "promotion":
+        functionIdAdd = "addPromotion";
+        functionIdUpdate = "updatePromotion";
+        field = "title";
+        fieldId = "promotionId";
+        fieldIdName = "pomotionId";
+        fieldValue = "title";
+        break;
+    }
     if (widget.data == null) {
       //add
-//      get("addAddress", (response) => Navigator.of(context).pop(true),
-//          params: {
-//            "consignee": controllers[0].text,
-//            "phoneNumber": controllers[1].text,
-//            "address": controllers[2].text,
-//            "userName": widget.userName,
-//          },
-//          errorCallback: () => Toast.show("添加地址失败", context));
+      get(functionIdAdd, (response) => Navigator.of(context).pop(true),
+          params: {
+            field: _controller1.text,
+          },
+          errorCallback: (msg) => Toast.show("添加失败", context));
     } else {
       //update
-//      get("updateAddress", (response) => Navigator.of(context).pop(true),
-//          params: {
-//            "consignee": controllers[0].text,
-//            "phoneNumber": controllers[1].text,
-//            "address": controllers[2].text,
-//            "addressId": "${widget.data['id']}",
-//          },
-//          errorCallback: () => Toast.show("更新地址失败", context));
+      get(functionIdUpdate, (response) => Navigator.of(context).pop(true),
+          params: {
+            fieldId: "${widget.data["${fieldIdName}"]}",
+            fieldValue: _controller1.text,
+          },
+          errorCallback: (msg) => Toast.show("更新失败", context));
     }
   }
 }

@@ -71,7 +71,7 @@ class PromotionManagerState extends State<PromotionManagerPage> {
   }
 
   refreshData() {
-    get("queryHotPromotion", (newsAndPromotion) {
+    get("queryAllHotPromotion", (newsAndPromotion) {
       setState(() {
         _newsAndPromotion = newsAndPromotion;
       });
