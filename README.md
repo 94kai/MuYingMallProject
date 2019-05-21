@@ -1,5 +1,5 @@
 # 效果图
-<div>
+<div align=center>
 <img src="./image/functionchoose.png" width="300" alt="入口"/>
 <img src="./image/home.png" width="300" alt="首页"/>
 <img src="./image/category.png" width="300" alt="其他分类tab"/>
