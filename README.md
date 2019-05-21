@@ -18,6 +18,8 @@
 <img src="./image/categorymanager.png" width="300" alt="分类列表"/>
 <img src="./image/newsmanager.png" width="300" alt="资讯列表"/>
 </div>  
+
+
 # 造数据
       
 ## 使用app的后台管理系统
