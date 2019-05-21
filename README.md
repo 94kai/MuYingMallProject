@@ -141,7 +141,7 @@ app直接操作
 
    下面是一个示例，我整理了一套商品数据，可以直接添加他们。（注意，添加的时候最好用文本编辑工具替换一下categoryId、promotionId的值，具体根据数据库中分类、活动的真实id来做，我给的数据中，分类id、活动id指定了1、2、3、4。。。具体还得看你数据库中真实的分类、活动的id，或者嫌麻烦，可以通过客户端的后台管理系统手动修改。有任何疑问可以提issue）
 
-   数据地址：https://github.com/kaikaixue/MuYingMallProject/blob/master/data/products.json
+   数据地址：[商品json数据](./data/products.json)
 
    ```json
    [
