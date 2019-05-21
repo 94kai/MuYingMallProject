@@ -5,9 +5,10 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * 活动
@@ -17,7 +18,7 @@ public class Promotion {
     @Column(nullable = false)
     private String title;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = IDENTITY)
     private int pomotionId;
     @Transient
     private List<Product> productsList;

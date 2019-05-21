@@ -170,7 +170,7 @@ public class HotController {
         ArrayList<Promotion> promotionsListData;
         ArrayList<News> newsListData = new ArrayList<>();
         if (promotionsList.isEmpty()) {
-            return new BaseResponse<>(-1, "暂无活动", null);
+            promotionsListData = new ArrayList<>();
         } else {
             promotionsListData = new ArrayList<>();
             promotionsList.get().forEach(e -> {

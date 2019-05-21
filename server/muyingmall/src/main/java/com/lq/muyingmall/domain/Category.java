@@ -9,13 +9,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Category implements Serializable {
     @Column(nullable = false, unique = true)
     private String categoryName;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     private int categoryId;
 
     public Category() {
