@@ -1,4 +1,5 @@
 # 效果图
+<div>
 <img src="./image/functionchoose.png" width="300" alt="入口"/>
 <img src="./image/home.png" width="300" alt="首页"/>
 <img src="./image/category.png" width="300" alt="其他分类tab"/>
@@ -16,7 +17,7 @@
 <img src="./image/promotionmanager.png" width="300" alt="活动列表"/>
 <img src="./image/categorymanager.png" width="300" alt="分类列表"/>
 <img src="./image/newsmanager.png" width="300" alt="资讯列表"/>
-  
+</div>  
 # 造数据
       
 ## 使用app的后台管理系统
