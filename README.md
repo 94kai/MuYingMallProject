@@ -1,31 +1,172 @@
 # 演示（图片较大，请耐心等待）
 
- ![演示](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/screenshot.gif)
+ ![入口](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/functionchoose.png)
 
-# 全局
+ ![首页](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/home.png)
+ ![其他分类tab](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/category.png)
+ ![详情](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/detail.png)
+ ![购物车](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/cart.png)
+ ![我的](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/me.png)
+ ![登录](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/login.png)
+ ![注册](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/register.png)
+ ![收货地址列表](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/addresslist.png)
+ ![编辑收货地](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/editaddress.png)
+ ![后台管理](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/manager.png)
+ ![商品列表](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/productmanager.png)
+ ![商品编辑](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/editproduct.png)
+ ![选择促销活动](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/chooosepromotion.png)
+ ![活动列表](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/spromotionmanager.png)
+ ![分类列表](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/categorymanager.png)
+ ![资讯列表](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/newsmanager.png)
 
-### 用户
+  
+# 造数据
+      
+## 使用app的后台管理系统
 
-1.登录之后换一个token回来，每次请求数据带上token，其他人利用同一账号登录之后token会被改变(每次登录都会重置)，所以上个用户就没法使用了。 
+app直接操作
 
-2.服务端拿到客户端的token，说明客户端认为登录了，就先校验token，如果校验失败，直接返回登录状态错误。 同理客户端如果拿到登录错误态，应该先清空本地登录信息，然后跳到登录页面。 
+## 使用postman批量添加数据                     
+1. 首页-热门-资讯
 
-3.服务端token存缓存，而不是数据库，查数据库费时。 
+   post请求，向 http://localhost:8080/api/addHotNews以body形式提交json
 
-### 分类 
+   ```json
+   [
+      {"news": "怎样提高母乳喂养的质和量?"},
+      {"news": "宝宝补维D能防糖尿病"}, 
+      {"news": "父母要善于发展宝宝的听觉"}, 
+      {"news": "请多给孩子一次“自我辩解”的机会"}
+   ]
+   ```
+2. 首页-热门-轮播图
 
-1.请求分类添加接口，需要带上超级管理员账户(token或者直接用户名加密码)。服务端校验成功后才可以添加分类 
+   post请求，向 http://localhost:8080/api/addHotBanner以body形式提交json
+   
+   url为轮播图的url，jump_value为点击跳转详情页后，对应的商品的id
 
-2.TODO:商家上传商品信息可以选择分类 
+   ```json
+   [
+      {
+         "jump_value": "18124465",
+         "url": "https://img.alicdn.com/imgextra/i4/2508158775/O1CN01ZzQNwe2EgzyK8XdVW_!!2508158775.jpg"
+      },
+      {
+         "jump_value": "18174928",
+         "url": "https://img.alicdn.com/imgextra/i4/2508158775/O1CN01gRLxMq2EgzyJOlFoX_!!2508158775.jpg"
+      },
+      {
+         "jump_value": "18135333",
+         "url": "https://img.alicdn.com/imgextra/i4/2508158775/O1CN01Bw411k2EgzyMxZ4m3_!!2508158775.jpg"
+         
+      },
+      {
+         "jump_value": "18144384",
+         "url": "https://img.alicdn.com/imgextra/i3/2508158775/O1CN01VTo1YY2EgzyMBGSwI_!!2508158775.jpg"
+      },
+      {
+         "jump_value": "18189644",
+         "url": "https://img.alicdn.com/imgextra/i1/2508158775/O1CN01q1sXeN2EgzyMlNvd7_!!2508158775.jpg"
+      }
+   ]
+   ```   
 
-#### 购物车
+3. 首页-热门-活动数据
 
-- 购物车相关的操作都需要加token
+   post请求，向 http://localhost:8080/api/addHotPromotion以body形式提交json
 
-# Server
+   在首页-热门-资讯下面以两个商品一组的形式展示。
+   添加商品时，可以通过指定promotionId来指定所属的活动。每个活动会展示两个商品。
 
-### 为你推荐
-- 通过分类id查出所有商品。随机抽取不重复的20个。如果商品数少于20，全部取出。
+   ```json
+   [
+      {
+         "title": "9.9包邮"
+      },
+      {
+         "title": "每日半价"
+      },
+      {
+         "title": "过年尝新鲜"
+      },
+      {
+         "title": "疯狂秒杀"
+      },
+      {
+         "title": "一起来拼团"
+      },
+      {
+         "title": "宝宝用品"
+      },
+      {
+         "title": "玩具乐器"
+      }
+   ]
+   ```
+
+4. 首页-tab
+
+   post请求，向 http://localhost:8080/api/addCategory以body形式提交json
+
+   默认会在首页展示一个热门tab，里面展示了轮播图、资讯、活动以及所有的商品列表。
+
+   之后每个tab展示这个tab分类下的商品。在添加商品的时候，可以指定商品所属的tab分类。
+
+   ```json
+   [{
+      "categoryName": "婴童服饰"
+   }, {
+      "categoryName": "玩具乐器"
+   }, {
+      "categoryName": "婴童鞋靴"
+   }, {
+      "categoryName": "尿不湿"
+   }, {
+      "categoryName": "孕妈用品"
+   }, {
+      "categoryName": "宝宝用品"
+   }, {
+      "categoryName": "奶瓶奶嘴"
+   }, {
+      "categoryName": "婴童湿巾"
+   }, {
+      "categoryName": "出行用品"
+   }]
+   ```
+
+5. 商品
+
+   post请求，向 http://localhost:8080/api/appProducts以body形式提交json
+
+   每个商品可以指定销量、价格、图片、名称、所属分类、所属活动。
+
+   下面是一个示例，我整理了一套商品数据，可以直接添加他们。（注意，添加的时候最好用文本编辑工具替换一下categoryId、promotionId的值，具体根据数据库中分类、活动的真实id来做，我给的数据中，分类id、活动id指定了1、2、3、4。。。具体还得看你数据库中真实的分类、活动的id，或者嫌麻烦，可以通过客户端的后台管理系统手动修改。有任何疑问可以提issue）
+
+   数据地址：https://github.com/kaikaixue/MuYingMallProject/blob/master/data/products.json
+
+   ```json
+   [
+    {
+        "sell_num": 68,
+        "original_price": 19.9,
+        "image": "https://gd1.alicdn.com/imgextra/i1/2957562192/TB27Mn4G4SYBuNjSsphXXbGvVXa_!!2957562192.jpg_480x480.jpg_.webp",
+        "title": "依卫湿巾10片X30包迷你随身装",
+        "categoryId": 1,
+        "promotionId": 2
+    },
+    {
+        "sell_num": 99,
+        "original_price": 69.9,
+        "image": "https://img.alicdn.com/imgextra/i2/838547268/O1CN01CHf1DQ23Yn6GTi9Zs_!!838547268.jpg_480x480.jpg_.webp",
+        "title": "眯眯熊婴儿拉拉裤护理型成长裤L52片",
+        "categoryId": 0,
+        "promotionId": 0
+    } 
+   ]
+   ```
+
+
+# 问题
 
 ### 数据库编码
 
@@ -46,63 +187,4 @@
 
 - mac
   - sudo lsof -i :8080 查看端口占用进程
-  - sudo kill -9 81881 杀进程                                                                                            
-
-### 注解
-
-- RequestBody
-  - 前端请求必须Content-type：application/json。body中通过raw传入json
-
-### 注册登录
-
-- userId+时间戳 进行md5产生token
-
-# 数据
-
-从某冷门app上扒来数据，稍微做了些处理，通过接口上传，具体的json数据在[这里](https://github.com/kaikaixue/MuYingMallProject/tree/master/data)
-
-1. 首页-热门-活动数据
-
-   ```json
-   post请求，向localhost:8080/api/addHotPromotion提交json
-   注意：1.title必须有。2.product节点下需要大于2，最好不要超过2，因为只会解析两条。3.图片最好为正方形。
-   {
-   	"title": "限时抢购",
-   	"product": [{
-   			"productImg": "https://gw.alicdn.com/bao/uploaded/i3/25929435/O1CN01wpWFNn2JZHNIOuUfJ_!!25929435.jpg",
-   			"title": "法国拉杜蓝乔核桃油婴幼儿食用婴儿儿童无添加宝宝辅食抖音同款"
-   		},
-   		{
-   			"productImg": "https://gw.alicdn.com/bao/uploaded/i2/26664899/O1CN01VPIcRw1m3moMyiaXm_!!0-item_pic.jpg",
-   			"title": "美国嘉宝星星泡芙米饼宝宝进口吃的小零食婴儿8个月幼儿食品1-3岁"
-   		}
-   	]
-   }
-   ```
-
-2. 首页-热门-资讯
-
-   ```json
-   post请求，向localhost:8080/api/addHotNews提交json
-   [
-       {
-   		"news": "怎样提高母乳喂养的质和量?"
-   	},
-   	{
-   		"news": "宝宝补维D能防糖尿病"
-   	}, {
-   		"news": "父母要善于发展宝宝的听觉"
-   	}, {
-   		"news": "请多给孩子一次“自我辩解”的机会"
-   	},
-   ]
-   ```
-
-   ​
-
-	​	
-
-
-
-# Client
-
+  - sudo kill -9 81881 杀进程                                                                   

@@ -27,6 +27,7 @@ class HomePageState extends State<HomePage>
     get("queryAllCategory", (categorys) {
       setState(() {
         _categorys = categorys;
+        _categorys.insert(0, {"categoryName": '热门'});
       });
     });
   }

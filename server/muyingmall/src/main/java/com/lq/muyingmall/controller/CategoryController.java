@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,22 +32,14 @@ public class CategoryController {
 
     /**
      * 添加分类
-     *
-     * @param passWord 超级管理员密码
      */
     @RequestMapping(value = "/addCategory", method = {RequestMethod.POST})
-    public BaseResponse addCategory(@RequestBody List<Category> categorys,
-                                    @RequestHeader(value = "password", required = false) String passWord) {
-        //TODO:校验密码
-        if ("123".equals(passWord)) {
-            for (Category category : categorys) {
-                categoryRepository.deleteAllByCategoryId(category.getCategoryId());
-                categoryRepository.save(category);
-            }
-            return new BaseResponse(0, "添加成功");
-        } else {
-            return new BaseResponse(-1, "无权限");
+    public BaseResponse addCategory(@RequestBody List<Category> categorys) {
+        for (Category category : categorys) {
+            categoryRepository.deleteAllByCategoryId(category.getCategoryId());
+            categoryRepository.save(category);
         }
+        return new BaseResponse(0, "添加成功");
     }
 
 
@@ -75,6 +66,7 @@ public class CategoryController {
         }
         return new BaseResponse<>(0, "addCategory成功");
     }
+
     @RequestMapping(value = "/deleteCategory", method = {RequestMethod.GET})
     public BaseResponse deleteCategory(int id) {
         try {
