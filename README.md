@@ -1,24 +1,21 @@
-# 演示（图片较大，请耐心等待）
-
- ![入口](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/functionchoose.png)
-
- ![首页](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/home.png)
- ![其他分类tab](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/category.png)
- ![详情](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/detail.png)
- ![购物车](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/cart.png)
- ![我的](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/me.png)
- ![登录](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/login.png)
- ![注册](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/register.png)
- ![收货地址列表](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/addresslist.png)
- ![编辑收货地](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/editaddress.png)
- ![后台管理](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/manager.png)
- ![商品列表](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/productmanager.png)
- ![商品编辑](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/editproduct.png)
- ![选择促销活动](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/chooosepromotion.png)
- ![活动列表](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/spromotionmanager.png)
- ![分类列表](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/categorymanager.png)
- ![资讯列表](https://github.com/kaikaixue/MuYingMallProject/blob/master/image/newsmanager.png)
-
+# 效果图
+<img src="./image/functionchoose.png" width="300" alt="入口"/>
+<img src="./image/home.png" width="300" alt="首页"/>
+<img src="./image/category.png" width="300" alt="其他分类tab"/>
+<img src="./image/detail.png" width="300" alt="详情"/>
+<img src="./image/cart.png" width="300" alt="购物车"/>
+<img src="./image/me.png" width="300" alt="我的"/>
+<img src="./image/login.png" width="300" alt="登录"/>
+<img src="./image/register.png" width="300" alt="注册"/>
+<img src="./image/addresslist.png" width="300" alt="收货地址列表"/>
+<img src="./image/editaddress.png" width="300" alt="编辑收货地"/>
+<img src="./image/manager.png" width="300" alt="后台管理"/>
+<img src="./image/productmanager.png" width="300" alt="商品列表"/>
+<img src="./image/editproduct.png" width="300" alt="商品编辑"/>
+<img src="./image/chooosepromotion.png" width="300" alt="选择促销活动"/>
+<img src="./image/promotionmanager.png" width="300" alt="活动列表"/>
+<img src="./image/categorymanager.png" width="300" alt="分类列表"/>
+<img src="./image/newsmanager.png" width="300" alt="资讯列表"/>
   
 # 造数据
       
