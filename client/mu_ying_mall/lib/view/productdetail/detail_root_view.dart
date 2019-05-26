@@ -22,18 +22,13 @@ class DetailRootViewState extends State<DetailRootView> {
   @override
   void initState() {
     super.initState();
-
     get(
         "queryProductDetailById",
         (data) => setState(() {
               this.data = data;
-//              for (var value in data.keys) {
-//                print("$value : ${data[value]}");
-//              }
             }),
         params: {'productId': "${widget.productId}"});
   }
-
   @override
   Widget build(BuildContext context) {
     if(data == null){

@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,17 +44,21 @@ public class LoginController {
         return new BaseResponse<>(0, new LoginState(token));
     }
 
-    @RequestMapping(value = "/hhhhh", method = {RequestMethod.GET})
-    public String hhhhh(String context, @RequestHeader(value = "token", required = false) String token) {
-        logger.info("hhhhh=======" + context);
-        return "hhhhh";
-    }
 
     @RequestMapping(value = "/register", method = {RequestMethod.POST})
     public BaseResponse register(@RequestBody User user) {
         User tempUser = userRepository.findByUserName(user.getUserName());
         if (tempUser != null) {
             return new BaseResponse(-1, "用户名被占用");
+        }
+        String userName = user.getUserName();
+        String passWord = user.getPassWord();
+        if (userName == null || userName.length() < 4 || userName.length() > 11) {
+            return new BaseResponse(-1, "用户名必须是4到11位");
+        }
+
+        if (passWord == null || passWord.length() < 4 || passWord.length() > 20) {
+            return new BaseResponse(-1, "密码必须是4到20位");
         }
         User save = userRepository.save(user);
         String token = getTokenByUserName(save.getUserName());

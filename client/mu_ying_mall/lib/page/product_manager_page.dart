@@ -101,36 +101,36 @@ class ProductManagerState extends State<ProductManagerPage> {
                   Container(
                     width: 20,
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        width: 200,
-                        child: Text(
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
                           product['title'],
                           maxLines: 2,
+                          softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 20),
                         ),
-                      ),
-                      Container(
-                        height: 10,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          product['categoryName'] != null
-                              ? Container(
-                                  child: Text("${product['categoryName']}"),
-                                  width: 100,
-                                )
-                              : Container(),
-                          product['promotionName'] != null
-                              ? Text("${product['promotionName']}")
-                              : Text("")
-                        ],
-                      ),
-                    ],
+                        Container(
+                          height: 10,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            product['categoryName'] != null
+                                ? Container(
+                                    child: Text("${product['categoryName']}"),
+                                    width: 100,
+                                  )
+                                : Container(),
+                            product['promotionName'] != null
+                                ? Text("${product['promotionName']}")
+                                : Text("")
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
